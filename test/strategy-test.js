@@ -1,6 +1,7 @@
 var vows = require('vows');
 var assert = require('assert');
 var util = require('util');
+var bearer = require('passport-http-bearer');
 var BearerStrategy = require('passport-http-bearer/strategy');
 
 
@@ -189,6 +190,181 @@ vows.describe('BearerStrategy').addBatch({
       },
       'should call error' : function(err, e) {
         assert.instanceOf(e, Error);
+      },
+    },
+  },
+  
+  'strategy handling a request that encounters an AuthenticationError during validation': {
+    topic: function() {
+      var strategy = new BearerStrategy(function(token, done) {
+        done(new bearer.AuthenticationError());
+      });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(new Error('should not be called'));
+        }
+        strategy.fail = function(challenge, status) {
+          self.callback(null, challenge, status);
+        }
+        
+        req.headers = {};
+        req.headers.authorization = 'Bearer vF9dft4qmT';
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should fail authentication with challenge' : function(err, challenge, status) {
+        // fail action was called, resulting in test callback
+        assert.isNull(err);
+        assert.isUndefined(status);
+        assert.equal(challenge, 'Bearer realm="Users", error="invalid_token"');
+      },
+    },
+  },
+  
+  'strategy handling a request that encounters an AuthenticationError with message during validation': {
+    topic: function() {
+      var strategy = new BearerStrategy(function(token, done) {
+        done(new bearer.AuthenticationError('The access token expired'));
+      });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(new Error('should not be called'));
+        }
+        strategy.fail = function(challenge, status) {
+          self.callback(null, challenge, status);
+        }
+        
+        req.headers = {};
+        req.headers.authorization = 'Bearer vF9dft4qmT';
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should fail authentication with challenge' : function(err, challenge, status) {
+        // fail action was called, resulting in test callback
+        assert.isNull(err);
+        assert.isUndefined(status);
+        assert.equal(challenge, 'Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
+      },
+    },
+  },
+  
+  'strategy handling a request that encounters an AuthenticationError with message and code during validation': {
+    topic: function() {
+      var strategy = new BearerStrategy(function(token, done) {
+        done(new bearer.AuthenticationError('The access token lacks email scope', 'insufficient_scope'));
+      });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(new Error('should not be called'));
+        }
+        strategy.fail = function(challenge, status) {
+          self.callback(null, challenge, status);
+        }
+        
+        req.headers = {};
+        req.headers.authorization = 'Bearer vF9dft4qmT';
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should fail authentication with challenge' : function(err, challenge, status) {
+        // fail action was called, resulting in test callback
+        assert.isNull(err);
+        assert.equal(status, 403);
+        assert.equal(challenge, 'Bearer realm="Users", error="insufficient_scope", error_description="The access token lacks email scope"');
+      },
+    },
+  },
+  
+  'strategy handling a request that encounters an AuthenticationError with message, code, and uri during validation': {
+    topic: function() {
+      var strategy = new BearerStrategy(function(token, done) {
+        done(new bearer.AuthenticationError('The access token lacks email scope', 'insufficient_scope', 'http://www.example.com/errors/12345'));
+      });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(new Error('should not be called'));
+        }
+        strategy.fail = function(challenge, status) {
+          self.callback(null, challenge, status);
+        }
+        
+        req.headers = {};
+        req.headers.authorization = 'Bearer vF9dft4qmT';
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should fail authentication with challenge' : function(err, challenge, status) {
+        // fail action was called, resulting in test callback
+        assert.isNull(err);
+        assert.equal(status, 403);
+        assert.equal(challenge, 'Bearer realm="Users", error="insufficient_scope", error_description="The access token lacks email scope", error_uri="http://www.example.com/errors/12345"');
+      },
+    },
+  },
+  
+  'strategy handling a request that encounters an AuthenticationError with code set to invalid_request': {
+    topic: function() {
+      var strategy = new BearerStrategy(function(token, done) {
+        done(new bearer.AuthenticationError('', 'invalid_request'));
+      });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(new Error('should not be called'));
+        }
+        strategy.fail = function(challenge, status) {
+          self.callback(null, challenge, status);
+        }
+        
+        req.headers = {};
+        req.headers.authorization = 'Bearer vF9dft4qmT';
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should fail authentication with challenge' : function(err, challenge, status) {
+        // fail action was called, resulting in test callback
+        assert.isNull(err);
+        assert.equal(status, 400);
+        assert.equal(challenge, 'Bearer realm="Users", error="invalid_request"');
       },
     },
   },
