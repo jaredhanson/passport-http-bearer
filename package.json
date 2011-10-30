@@ -9,7 +9,7 @@
   },
   "main": "./lib/passport-http-bearer",
   "dependencies": {
-    "passport": ">= 0.1.2"
+    "passport": ">= 0.1.3"
   },
   "engines": { "node": ">= 0.4.0" },
   "keywords": ["passport", "http", "bearer", "oauth", "authn", "authentication"]
