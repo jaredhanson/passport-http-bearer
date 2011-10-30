@@ -274,8 +274,8 @@ vows.describe('BearerStrategy').addBatch({
         strategy.success = function(user) {
           self.callback(new Error('should not be called'));
         }
-        strategy.fail = function(challenge) {
-          self.callback(null, challenge);
+        strategy.fail = function(status) {
+          self.callback(null, status);
         }
         
         req.headers = {};
@@ -285,10 +285,10 @@ vows.describe('BearerStrategy').addBatch({
         });
       },
       
-      'should fail authentication with challenge' : function(err, challenge) {
+      'should fail authentication with 400 Bad Request' : function(err, status) {
         // fail action was called, resulting in test callback
         assert.isNull(err);
-        assert.equal(challenge, 'Bearer realm="Users"');
+        assert.equal(status, 400);
       },
     },
   },
@@ -357,6 +357,72 @@ vows.describe('BearerStrategy').addBatch({
         // fail action was called, resulting in test callback
         assert.isNull(err);
         assert.equal(challenge, 'Bearer realm="Administrators"');
+      },
+    },
+  },
+  
+  'strategy handling a request without authorization credentials and scope option set': {
+    topic: function() {
+      var strategy = new BearerStrategy({ scope: 'email' },
+        function(token, done) {
+          done(null, { token: token });
+        });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(new Error('should not be called'));
+        }
+        strategy.fail = function(challenge) {
+          self.callback(null, challenge);
+        }
+        
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should fail authentication with challenge' : function(err, challenge) {
+        // fail action was called, resulting in test callback
+        assert.isNull(err);
+        assert.equal(challenge, 'Bearer realm="Users", scope="email"');
+      },
+    },
+  },
+  
+  'strategy handling a request without authorization credentials and multiple scope options set': {
+    topic: function() {
+      var strategy = new BearerStrategy({ scope: ['email', 'feed'] },
+        function(token, done) {
+          done(null, { token: token });
+        });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(new Error('should not be called'));
+        }
+        strategy.fail = function(challenge) {
+          self.callback(null, challenge);
+        }
+        
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should fail authentication with challenge' : function(err, challenge) {
+        // fail action was called, resulting in test callback
+        assert.isNull(err);
+        assert.equal(challenge, 'Bearer realm="Users", scope="email feed"');
       },
     },
   },
