@@ -12,5 +12,5 @@
     "passport": ">= 0.1.2"
   },
   "engines": { "node": ">= 0.4.0" },
-  "keywords": ["passport", "http", "bearer", "authn", "authentication"]
+  "keywords": ["passport", "http", "bearer", "oauth", "authn", "authentication"]
 }
