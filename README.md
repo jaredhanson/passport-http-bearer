@@ -2,6 +2,56 @@
 
 HTTP Bearer authentication strategy for [Passport](https://github.com/jaredhanson/passport).
 
+## Installation
+
+    $ npm install passport-http-bearer
+
+## Usage
+
+#### Configure Strategy
+
+The HTTP Bearer authentication strategy authenticates users using a bearer
+token.  The strategy requires a `validate` callback, which accepts that
+credential and calls `done` providing a user.
+
+    passport.use(new BearerStrategy(
+      function(token, done) {
+        User.findOne({ token: token }, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          if (!sufficientScope(user, token)) { return done(new bearer.AuthenticationError('', 'insufficient_scope')); }
+          return done(null, user);
+        });
+      }
+    ));
+
+#### Authenticate Requests
+
+Use `passport.authenticate()`, specifying the `'bearer'` strategy, to
+authenticate requests.  Requests containing bearer tokens do not require session
+support, so the `session` option can be set to `false`.
+
+For example, as route middleware in an [Express](http://expressjs.com/)
+application:
+
+    app.get('/profile', 
+      passport.authenticate('bearer', { session: false }),
+      function(req, res) {
+        res.json(req.user);
+      });
+
+#### Examples
+
+For a complete, working example, refer to the [Bearer example](https://github.com/jaredhanson/passport-http-bearer/tree/master/examples/bearer).
+
+## Implementation
+
+This module is implemented based on [The OAuth 2.0 Authorization Protocol: Bearer Tokens](http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-12),
+Draft 12.  Implementers are encouraged to track the progress of this
+specification and update update their implementations as necessary.
+Furthermore, the implications of relying on a non-final draft specification
+should be understood prior to deployment.
+
 ## Credits
 
   - [Jared Hanson](http://github.com/jaredhanson)
