@@ -1,0 +1,16 @@
+{
+  "name": "passport-http-bearer",
+  "version": "0.1.0",
+  "description": "HTTP Bearer authentication strategy for Passport.",
+  "author": "Jared Hanson <jaredhanson@gmail.com> (http://www.jaredhanson.net/)",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jaredhanson/passport-http-bearer.git"
+  },
+  "main": "./lib/passport-http-bearer",
+  "dependencies": {
+    "passport": ">= 0.1.2"
+  },
+  "engines": { "node": ">= 0.4.0" },
+  "keywords": ["passport", "http", "bearer", "authn", "authentication"]
+}
