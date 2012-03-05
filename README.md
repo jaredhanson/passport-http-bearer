@@ -40,10 +40,6 @@ application:
         res.json(req.user);
       });
 
-#### Examples
-
-For a complete, working example, refer to the [Bearer example](https://github.com/jaredhanson/passport-http-bearer/tree/master/examples/bearer).
-
 ## Implementation
 
 This module is implemented based on [The OAuth 2.0 Authorization Protocol: Bearer Tokens](http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-12),
@@ -51,6 +47,17 @@ Draft 12.  Implementers are encouraged to track the progress of this
 specification and update update their implementations as necessary.
 Furthermore, the implications of relying on a non-final draft specification
 should be understood prior to deployment.
+
+## Examples
+
+For a complete, working example, refer to the [Bearer example](https://github.com/jaredhanson/passport-http-bearer/tree/master/examples/bearer).
+
+## Tests
+
+    $ npm install --dev
+    $ make test
+
+[![Build Status](https://secure.travis-ci.org/jaredhanson/passport-http-bearer.png)](http://travis-ci.org/jaredhanson/passport-http-bearer)
 
 ## Credits
 

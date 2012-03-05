@@ -2,15 +2,29 @@
   "name": "passport-http-bearer",
   "version": "0.1.0",
   "description": "HTTP Bearer authentication strategy for Passport.",
-  "author": "Jared Hanson <jaredhanson@gmail.com> (http://www.jaredhanson.net/)",
+  "author": { "name": "Jared Hanson", "email": "jaredhanson@gmail.com", "url": "http://www.jaredhanson.net/" },
   "repository": {
     "type": "git",
-    "url": "http://github.com/jaredhanson/passport-http-bearer.git"
+    "url": "git://github.com/jaredhanson/passport-http-bearer.git"
+  },
+  "bugs": {
+    "url": "http://github.com/jaredhanson/passport-http-bearer/issues"
   },
   "main": "./lib/passport-http-bearer",
   "dependencies": {
-    "passport": ">= 0.1.3"
+    "pkginfo": "0.2.x",
+    "passport": "~0.1.3"
+  },
+  "devDependencies": {
+    "vows": "0.6.x"
+  },
+  "scripts": {
+    "test": "NODE_PATH=lib node_modules/.bin/vows test/*-test.js"
   },
   "engines": { "node": ">= 0.4.0" },
+  "licenses": [ {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/MIT" 
+  } ],
   "keywords": ["passport", "http", "bearer", "oauth", "authn", "authentication"]
 }
