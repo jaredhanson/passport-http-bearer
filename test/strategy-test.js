@@ -608,6 +608,7 @@ vows.describe('BearerStrategy').addBatch({
       assert.throws(function() { new BearerStrategy() });
     },
   },
+  
   'strategy getting token via multiple methods': {
     topic: function() {
       var strategy = new BearerStrategy({ scope: ['email', 'feed'] },function(token, done) {
@@ -628,7 +629,7 @@ vows.describe('BearerStrategy').addBatch({
       process.nextTick(function() {
         strategy.authenticate(req);
       });
-     },
+    },
     'should fail authentication with error 400': function(err, status) {
       assert.isNull(err);
       assert.equal(status, 400);
