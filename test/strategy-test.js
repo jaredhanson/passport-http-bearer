@@ -48,7 +48,7 @@ vows.describe('BearerStrategy').addBatch({
       },
       'should authenticate' : function(err, user) {
         assert.equal(user.token, 'vF9dft4qmT');
-      },
+      }
     },
   },
   
@@ -608,5 +608,31 @@ vows.describe('BearerStrategy').addBatch({
       assert.throws(function() { new BearerStrategy() });
     },
   },
+  'strategy getting token via multiple methods': {
+    topic: function() {
+      var strategy = new BearerStrategy({ scope: ['email', 'feed'] },function(token, done) {
+        assert.ok(false);
+      });
+      var self = this;
+      var req = {};
+      req.headers = {};
+      req.headers.authorization = 'BEARER vF9dft4qmT';
+      req.query = {};
+      req.query.access_token = "vF9dft4qmT";
+      strategy.success = function(user) {
+        self.callback(new Error("should not be called"));
+      };
+      strategy.fail = function(challenge) {
+        self.callback(null, challenge);
+      }
+      process.nextTick(function() {
+        strategy.authenticate(req);
+      });
+     },
+    'should fail authentication with error 400': function(err, status) {
+      assert.isNull(err);
+      assert.equal(status, 400);
+    }
+  }
   
 }).export(module);
