@@ -2,6 +2,15 @@
 
 HTTP Bearer authentication strategy for [Passport](https://github.com/jaredhanson/passport).
 
+This module lets you authenticate HTTP requests using bearer tokens in your
+Node.js applications.  Bearer tokens are typically used protect API endpoints,
+and are often issued using OAuth 2.0.
+
+By plugging into Passport, bearer token support can be easily and unobtrusively
+integrated into any application or framework that supports
+[Connect](http://www.senchalabs.org/connect/)-style middleware, including
+[Express](http://expressjs.com/).
+
 ## Installation
 
     $ npm install passport-http-bearer
