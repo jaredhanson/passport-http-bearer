@@ -21,15 +21,17 @@ integrated into any application or framework that supports
 
 The HTTP Bearer authentication strategy authenticates users using a bearer
 token.  The strategy requires a `validate` callback, which accepts that
-credential and calls `done` providing a user.
+credential and calls `done` providing a user.  Optional `info` can be passed,
+typically including associated scope, which will be set by Passport at
+`req.authInfo` to be used by later middleware for authorization and access
+control.
 
     passport.use(new BearerStrategy(
       function(token, done) {
         User.findOne({ token: token }, function (err, user) {
           if (err) { return done(err); }
           if (!user) { return done(null, false); }
-          if (!sufficientScope(user, token)) { return done(new bearer.AuthenticationError('', 'insufficient_scope')); }
-          return done(null, user);
+          return done(null, user, { scope: 'all' });
         });
       }
     ));
