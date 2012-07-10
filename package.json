@@ -1,6 +1,6 @@
 {
   "name": "passport-http-bearer",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "HTTP Bearer authentication strategy for Passport.",
   "author": { "name": "Jared Hanson", "email": "jaredhanson@gmail.com", "url": "http://www.jaredhanson.net/" },
   "repository": {
