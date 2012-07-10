@@ -122,6 +122,44 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  'strategy handling a valid request and passing additional info': {
+    topic: function() {
+      var strategy = new BearerStrategy(function(token, done) {
+        done(null, { token: token }, { scope: 'email' });
+      });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user, info) {
+          self.callback(null, user, info);
+        }
+        strategy.fail = function() {
+          self.callback(new Error('should not be called'));
+        }
+        
+        req.headers = {};
+        req.headers.authorization = 'Bearer vF9dft4qmT';
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should not generate an error' : function(err, user) {
+        assert.isNull(err);
+      },
+      'should authenticate' : function(err, user) {
+        assert.equal(user.token, 'vF9dft4qmT');
+      },
+      'should pass auth info' : function(err, user, info) {
+        assert.equal(info.scope, 'email');
+      }
+    },
+  },
+  
   'strategy handling a request that is not validated': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
