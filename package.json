@@ -1,6 +1,6 @@
 {
   "name": "passport-http-bearer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "HTTP Bearer authentication strategy for Passport.",
   "keywords": ["passport", "http", "bearer", "oauth", "authn", "authentication"],
   "repository": {
