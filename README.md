@@ -51,6 +51,12 @@ application:
         res.json(req.user);
       });
 
+#### Issuing Tokens
+
+Bearer tokens are typically issued using OAuth 2.0.  [OAuth2orize](https://github.com/jaredhanson/oauth2orize)
+is a toolkit for implementing OAuth 2.0 servers and issuing bearer tokens.  Once
+issued, this module can be used to authenticate tokens as described above.
+
 ## Implementation
 
 This module is implemented based on [The OAuth 2.0 Authorization Protocol: Bearer Tokens](http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-12),
