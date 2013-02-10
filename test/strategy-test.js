@@ -160,6 +160,45 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  'strategy handling a valid request with authorization header with req argument to callback': {
+    topic: function() {
+      var strategy = new BearerStrategy({passReqToCallback: true}, function(req, token, done) {
+        done(null, { token: token, foo: req.foo });
+      });
+      return strategy;
+    },
+    
+    'after augmenting with actions': {
+      topic: function(strategy) {
+        var self = this;
+        var req = {};
+        strategy.success = function(user) {
+          self.callback(null, user);
+        }
+        strategy.fail = function() {
+          self.callback(new Error('should not be called'));
+        }
+        
+        req.headers = {};
+        req.headers.authorization = 'Bearer vF9dft4qmT';
+        req.foo = 'bar';
+        process.nextTick(function () {
+          strategy.authenticate(req);
+        });
+      },
+      
+      'should not generate an error' : function(err, user) {
+        assert.isNull(err);
+      },
+      'should authenticate' : function(err, user) {
+        assert.equal(user.token, 'vF9dft4qmT');
+      },
+      'should have request details' : function(err, user) {
+        assert.equal(user.foo, 'bar');
+      },
+    },
+  },
+  
   'strategy handling a request that is not validated': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
