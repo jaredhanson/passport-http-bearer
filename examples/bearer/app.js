@@ -40,8 +40,7 @@ passport.use(new BearerStrategy({
         return done(null, user);
       })
     });
-  }
-));
+});
 
 /* 
 // Return back the request object example by passing in options "passReqToCallback": true
