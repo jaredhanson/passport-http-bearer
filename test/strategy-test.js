@@ -2,7 +2,7 @@ var vows = require('vows');
 var assert = require('assert');
 var util = require('util');
 var bearer = require('..');
-var BearerStrategy = require('../lib/passport-http-bearer/strategy');
+var BearerStrategy = require('../lib/strategy');
 
 
 vows.describe('BearerStrategy').addBatch({
