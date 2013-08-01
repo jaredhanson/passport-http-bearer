@@ -37,7 +37,7 @@
     "passport-strategy": "1.x.x"
   },
   "devDependencies": {
-    "vows": "0.6.x"
+    "vows": "0.7.x"
   },
   "engines": {
     "node": ">= 0.4.0"
