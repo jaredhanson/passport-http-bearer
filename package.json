@@ -21,7 +21,6 @@
   } ],
   "main": "./lib/passport-http-bearer",
   "dependencies": {
-    "pkginfo": "0.2.x",
     "passport-strategy": "1.x.x"
   },
   "devDependencies": {
