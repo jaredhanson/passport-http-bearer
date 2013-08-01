@@ -3,7 +3,7 @@ TESTS ?= test/*-test.js
 
 lint: lint-jshint
 test: test-vows
-test-cov: test-istanbul-mocha
+test-cov: test-istanbul-vows
 view-cov: view-istanbul-report
 
 
