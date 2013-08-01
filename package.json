@@ -22,7 +22,7 @@
   "main": "./lib/passport-http-bearer",
   "dependencies": {
     "pkginfo": "0.2.x",
-    "passport": "~0.1.3"
+    "passport-strategy": "1.x.x"
   },
   "devDependencies": {
     "vows": "0.6.x"
