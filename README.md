@@ -1,10 +1,16 @@
-# Passport-HTTP-Bearer
+# passport-http-bearer
 
-HTTP Bearer authentication strategy for [Passport](https://github.com/jaredhanson/passport).
+[![Build](https://travis-ci.org/jaredhanson/passport-http-bearer.png)](http://travis-ci.org/jaredhanson/passport-http-bearer)
+[![Coverage](https://coveralls.io/repos/jaredhanson/passport-http-bearer/badge.png)](https://coveralls.io/r/jaredhanson/passport-http-bearer)
+[![Dependencies](https://david-dm.org/jaredhanson/passport-http-bearer.png)](http://david-dm.org/jaredhanson/passport-http-bearer)
 
-This module lets you authenticate HTTP requests using bearer tokens in your
-Node.js applications.  Bearer tokens are typically used protect API endpoints,
-and are often issued using OAuth 2.0.
+
+HTTP Bearer authentication strategy for [Passport](http://passportjs.org/).
+
+This module lets you authenticate HTTP requests using bearer tokens, as
+specified by [RFC 6750](http://tools.ietf.org/html/rfc6750), in your Node.js
+applications.  Bearer tokens are typically used protect API endpoints, and are
+often issued using OAuth 2.0.
 
 By plugging into Passport, bearer token support can be easily and unobtrusively
 integrated into any application or framework that supports
@@ -57,24 +63,18 @@ Bearer tokens are typically issued using OAuth 2.0.  [OAuth2orize](https://githu
 is a toolkit for implementing OAuth 2.0 servers and issuing bearer tokens.  Once
 issued, this module can be used to authenticate tokens as described above.
 
-## Implementation
-
-This module is implemented based on [The OAuth 2.0 Authorization Protocol: Bearer Tokens](http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-12),
-Draft 12.  Implementers are encouraged to track the progress of this
-specification and update update their implementations as necessary.
-Furthermore, the implications of relying on a non-final draft specification
-should be understood prior to deployment.
-
 ## Examples
 
 For a complete, working example, refer to the [Bearer example](https://github.com/jaredhanson/passport-http-bearer/tree/master/examples/bearer).
 
+## Related Modules
+
+- [OAuth2orize](https://github.com/jaredhanson/oauth2orize) — OAuth 2.0 authorization server toolkit
+
 ## Tests
 
-    $ npm install --dev
-    $ make test
-
-[![Build Status](https://secure.travis-ci.org/jaredhanson/passport-http-bearer.png)](http://travis-ci.org/jaredhanson/passport-http-bearer)
+    $ npm install
+    $ npm test
 
 ## Credits
 
