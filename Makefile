@@ -12,7 +12,6 @@ view-cov: view-istanbul-report
 # ==============================================================================
 include support/mk/node.mk
 include support/mk/mocha.mk
-include support/mk/vows.mk
 
 # ==============================================================================
 # Browserify
