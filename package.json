@@ -37,10 +37,9 @@
     "passport-strategy": "1.x.x"
   },
   "devDependencies": {
-    "vows": "0.7.x",
     "mocha": "1.x.x",
     "chai": "1.x.x",
-    "chai-passport-strategy": "0.0.x"
+    "chai-passport-strategy": "0.1.x"
   },
   "engines": {
     "node": ">= 0.4.0"
