@@ -68,7 +68,7 @@ describe('strategy with default options', function() {
     });
   });
   
-  describe('handling a request with valid credential in URL query', function() {
+  describe('handling a request with valid credential in URL query parameter', function() {
     var user
       , info;
     
