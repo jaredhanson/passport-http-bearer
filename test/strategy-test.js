@@ -7,6 +7,7 @@ var BearerStrategy = require('../lib/strategy');
 
 vows.describe('BearerStrategy').addBatch({
   
+  // OK
   'strategy': {
     topic: function() {
       return new BearerStrategy(function() {});
@@ -17,6 +18,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a valid request with authorization header': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -52,6 +54,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a valid request with form-encoded body': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -87,6 +90,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a valid request with URI query': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -122,6 +126,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a valid request and passing additional info': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -160,6 +165,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a valid request with authorization header with req argument to callback': {
     topic: function() {
       var strategy = new BearerStrategy({passReqToCallback: true}, function(req, token, done) {
@@ -199,6 +205,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request that is not validated': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -233,6 +240,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request that encounters an error during verification': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -271,6 +279,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request without authorization credentials': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -303,6 +312,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request with non-Bearer authorization header': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -337,6 +347,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request with malformed authorization header': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -371,6 +382,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a valid request with BEARER scheme in capitalized letters': {
     topic: function() {
       var strategy = new BearerStrategy(function(token, done) {
@@ -406,6 +418,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request without authorization credentials and realm option set': {
     topic: function() {
       var strategy = new BearerStrategy({ realm: 'Administrators' },
@@ -439,6 +452,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request without authorization credentials and scope option set': {
     topic: function() {
       var strategy = new BearerStrategy({ scope: 'email' },
@@ -472,6 +486,7 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy handling a request without authorization credentials and multiple scope options set': {
     topic: function() {
       var strategy = new BearerStrategy({ scope: ['email', 'feed'] },
@@ -505,12 +520,14 @@ vows.describe('BearerStrategy').addBatch({
     },
   },
   
+  // OK
   'strategy constructed without a validate callback': {
     'should throw an error': function (strategy) {
       assert.throws(function() { new BearerStrategy() });
     },
   },
   
+  // OK
   'strategy getting token via multiple methods': {
     topic: function() {
       var strategy = new BearerStrategy({ scope: ['email', 'feed'] },function(token, done) {
