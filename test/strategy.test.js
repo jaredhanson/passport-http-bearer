@@ -9,7 +9,7 @@ describe('Strategy', function() {
     expect(strategy.name).to.equal('bearer');
   });
   
-  describe('constructed without a verify callback', function() {
+  it('constructed without a verify callback', function() {
     expect(function() {
       new Strategy();
     }).to.throw(TypeError, 'passport-http-bearer.Strategy requires a verify callback');
