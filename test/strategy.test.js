@@ -12,7 +12,7 @@ describe('Strategy', function() {
   it('constructed without a verify callback', function() {
     expect(function() {
       new Strategy();
-    }).to.throw(TypeError, 'passport-http-bearer.Strategy requires a verify callback');
+    }).to.throw(TypeError, 'HTTPBearerStrategy requires a verify callback');
   });
   
 });
