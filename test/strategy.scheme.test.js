@@ -2,7 +2,7 @@ var chai = require('chai')
   , Strategy = require('../lib/strategy');
 
 
-describe('strategy handling authorization header scheme variations', function() {
+describe('Strategy', function() {
     
   var strategy = new Strategy(function(token, done) {
     if (token == 'vF9dft4qmT') { 
@@ -71,6 +71,27 @@ describe('strategy handling authorization header scheme variations', function() 
         })
         .req(function(req) {
           req.headers.authorization = 'XBearer vF9dft4qmT';
+        })
+        .authenticate();
+    });
+    
+    it('should fail with challenge', function() {
+      expect(challenge).to.be.a.string;
+      expect(challenge).to.equal('Bearer realm="Users"');
+    });
+  });
+  
+  describe('handling a request with non-Bearer credentials', function() {
+    var challenge;
+    
+    before(function(done) {
+      chai.passport(strategy)
+        .fail(function(c) {
+          challenge = c;
+          done();
+        })
+        .req(function(req) {
+          req.headers.authorization = 'XXXXX vF9dft4qmT';
         })
         .authenticate();
     });

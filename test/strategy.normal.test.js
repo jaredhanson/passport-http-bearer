@@ -2,7 +2,7 @@ var chai = require('chai')
   , Strategy = require('../lib/strategy');
 
 
-describe('strategy with default options', function() {
+describe('Strategy', function() {
     
   var strategy = new Strategy(function(token, done) {
     if (token == 'vF9dft4qmT') { 
@@ -11,7 +11,7 @@ describe('strategy with default options', function() {
     return done(null, false);
   });
   
-  describe('handling a request with valid credential in header', function() {
+  describe('handling a request with valid token in header', function() {
     var user
       , info;
     
@@ -39,7 +39,7 @@ describe('strategy with default options', function() {
     });
   });
   
-  describe('handling a request with valid credential in form-encoded body', function() {
+  describe('handling a request with valid token in form-encoded body parameter', function() {
     var user
       , info;
     
@@ -68,7 +68,7 @@ describe('strategy with default options', function() {
     });
   });
   
-  describe('handling a request with valid credential in URL query parameter', function() {
+  describe('handling a request with valid credential in URI query parameter', function() {
     var user
       , info;
     
@@ -97,7 +97,7 @@ describe('strategy with default options', function() {
     });
   });
   
-  describe('handling a request with invalid credential in header', function() {
+  describe('handling a request with wrong token in header', function() {
     var challenge;
     
     before(function(done) {
@@ -107,7 +107,7 @@ describe('strategy with default options', function() {
           done();
         })
         .req(function(req) {
-          req.headers.authorization = 'Bearer NOT-vF9dft4qmT';
+          req.headers.authorization = 'Bearer WRONG';
         })
         .authenticate();
     });

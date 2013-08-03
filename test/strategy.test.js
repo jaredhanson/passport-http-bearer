@@ -9,7 +9,7 @@ describe('Strategy', function() {
     expect(strategy.name).to.equal('bearer');
   });
   
-  it('constructed without a verify callback', function() {
+  it('should throw if constructed without a verify callback', function() {
     expect(function() {
       new Strategy();
     }).to.throw(TypeError, 'HTTPBearerStrategy requires a verify callback');
