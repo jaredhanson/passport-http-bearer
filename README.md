@@ -65,7 +65,7 @@ issued, this module can be used to authenticate tokens as described above.
 
 #### Making authenticated requests
 The HTTP Bearer authentication strategy authenticates requests based on a bearer token contained in the:
-* `Authorization` header field
+* `Authorization` header field where the value is in the format `{scheme} {token}` and scheme is "Bearer" in this case.
 * or `access_token` body parameter
 * or `access_token` query parameter
 
