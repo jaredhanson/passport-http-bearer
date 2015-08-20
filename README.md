@@ -65,7 +65,7 @@ issued, this module can be used to authenticate tokens as described above.
 
 ## Examples
 
-For a complete, working example, refer to the [Bearer example](https://github.com/jaredhanson/passport-http-bearer/tree/master/examples/bearer).
+For a complete, working example, refer to the [Bearer example](https://github.com/passport/express-4.x-http-bearer-example).
 
 ## Related Modules
 
