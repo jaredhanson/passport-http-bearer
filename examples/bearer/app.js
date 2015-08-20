@@ -9,6 +9,8 @@ var users = [
   , { id: 2, username: 'joe', token: 'abcdefghi', email: 'joe@example.com' }
 ];
 
+var port = process.env.PORT || 3000;
+
 function findByToken(token, fn) {
   for (var i = 0, len = users.length; i < len; i++) {
     var user = users[i];
@@ -72,19 +74,14 @@ passport.use(new BearerStrategy({ "passReqToCallback": true },
 */
 
 
+var app = express();
 
-var app = express.createServer();
-
-// configure Express
-app.configure(function() {
-  app.use(express.logger());
-  // Initialize Passport!  Note: no need to use session middleware when each
-  // request carries authentication credentials, as is the case with HTTP
-  // Bearer.
-  app.use(passport.initialize());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
+// Initialize Passport!  Note: no need to use session middleware when each
+// request carries authentication credentials, as is the case with HTTP
+// Bearer.
+app.use(passport.initialize());
+// app.use(app.router);
+app.use(express.static(__dirname + '/public'));
 
 
 // curl -v http://127.0.0.1:3000/?access_token=123456789
@@ -95,4 +92,5 @@ app.get('/',
     res.json({ username: req.user.username, email: req.user.email });
   });
 
-app.listen(3000);
+app.listen(port);
+console.log('Listening to port ' + port);
