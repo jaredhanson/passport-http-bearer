@@ -26,6 +26,7 @@
     "email": "jaredhanson@gmail.com",
     "url": "http://www.jaredhanson.net/"
   },
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT",
