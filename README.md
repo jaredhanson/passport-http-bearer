@@ -26,14 +26,37 @@ integrated into any application or framework that supports
 #### Configure Strategy
 
 The HTTP Bearer authentication strategy authenticates users using a bearer
-token.  The strategy requires a `verify` callback, which accepts that
-credential and calls `done` providing a user.  Optional `info` can be passed,
-typically including associated scope, which will be set by Passport at
-`req.authInfo` to be used by later middleware for authorization and access
-control.
+token.  The strategy requires a `verify` callback, which accepts that `token`
+credential and calls `done` providing a user.  Optional `info` can be passed
+to the callback, typically including associated scope, which will be set by 
+Passport at `req.authInfo` to be used by later middleware for authorization 
+and access control.
 
     passport.use(new BearerStrategy(
       function(token, done) {
+        User.findOne({ token: token }, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          return done(null, user, { scope: 'all' });
+        });
+      }
+    ));
+
+There are a couple of options that can be set when instantiating the bearer 
+strategy...
+
+* `passReqToCallback` (boolean) - default `false`
+  * If set to `true` then `req` will be passed as the first argument to the verify callback.
+* `base64EncodedToken` (boolean) - default `false`
+  * If set to `true` then incoming bearer tokens are expected to be base64 encoded.
+
+Using these options would change the configuration like so:
+
+    passport.use(new BearerStrategy({
+        passReqToCallback  : true,
+        base64EncodedToken : true
+      },
+      function(req, token, done) {
         User.findOne({ token: token }, function (err, user) {
           if (err) { return done(err); }
           if (!user) { return done(null, false); }
