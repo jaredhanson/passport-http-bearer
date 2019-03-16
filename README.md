@@ -38,15 +38,17 @@ typically including associated scope, which will be set by Passport at
 `req.authInfo` to be used by later middleware for authorization and access
 control.
 
-    passport.use(new BearerStrategy(
-      function(token, done) {
-        User.findOne({ token: token }, function (err, user) {
-          if (err) { return done(err); }
-          if (!user) { return done(null, false); }
-          return done(null, user, { scope: 'all' });
-        });
-      }
-    ));
+```js
+passport.use(new BearerStrategy(
+  function(token, done) {
+    User.findOne({ token: token }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      return done(null, user, { scope: 'all' });
+    });
+  }
+));
+```
 
 #### Authenticate Requests
 
@@ -57,11 +59,13 @@ support, so the `session` option can be set to `false`.
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
-    app.get('/profile', 
-      passport.authenticate('bearer', { session: false }),
-      function(req, res) {
-        res.json(req.user);
-      });
+```js
+app.get('/profile', 
+  passport.authenticate('bearer', { session: false }),
+  function(req, res) {
+    res.json(req.user);
+  });
+```
 
 #### Issuing Tokens
 
