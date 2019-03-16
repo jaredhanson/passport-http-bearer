@@ -18,11 +18,10 @@ integrated into any application or framework that supports
 
 ---
 
-Status:
-[![Build](https://travis-ci.org/jaredhanson/passport-http-bearer.png)](http://travis-ci.org/jaredhanson/passport-http-bearer)
-[![Coverage](https://coveralls.io/repos/jaredhanson/passport-http-bearer/badge.png)](https://coveralls.io/r/jaredhanson/passport-http-bearer)
-[![Dependencies](https://david-dm.org/jaredhanson/passport-http-bearer.png)](http://david-dm.org/jaredhanson/passport-http-bearer)
-
+[![npm](https://img.shields.io/npm/v/passport-http-bearer.svg)](https://www.npmjs.com/package/passport-http-bearer)
+[![build](https://img.shields.io/travis/jaredhanson/passport-http-bearer.svg)](https://travis-ci.org/jaredhanson/passport-http-bearer)
+[![coverage](https://img.shields.io/coveralls/jaredhanson/passport-http-bearer.svg)](https://coveralls.io/github/jaredhanson/passport-http-bearer)
+[...](https://github.com/jaredhanson/passport-http-bearer/wiki/Status)
 
 ## Install
 
