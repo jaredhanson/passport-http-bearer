@@ -73,6 +73,12 @@ Bearer tokens are typically issued using OAuth 2.0.  [OAuth2orize](https://githu
 is a toolkit for implementing OAuth 2.0 servers and issuing bearer tokens.  Once
 issued, this module can be used to authenticate tokens as described above.
 
+#### Making authenticated requests
+The HTTP Bearer authentication strategy authenticates requests based on a bearer token contained in the:
+* `Authorization` header field where the value is in the format `{scheme} {token}` and scheme is "Bearer" in this case.
+* or `access_token` body parameter
+* or `access_token` query parameter
+
 ## Examples
 
 For a complete, working example, refer to the [Bearer example](https://github.com/passport/express-4.x-http-bearer-example).
