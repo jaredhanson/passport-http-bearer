@@ -1,35 +1,24 @@
-# passport-http-bearer
+# passport-loopback3
 
-HTTP Bearer authentication strategy for [Passport](http://passportjs.org/).
+Loopback 3 Authentication strategy for [Passport](http://passportjs.org/), based on `http-bearer`.
 
-This module lets you authenticate HTTP requests using bearer tokens, as
-specified by [RFC 6750](http://tools.ietf.org/html/rfc6750), in your Node.js
-applications.  Bearer tokens are typically used to protect API endpoints, and are
-often issued using OAuth 2.0.
+Loopback 3's authentication model is very close to, but not exactly the same as, HTTP bearer tokens, as
+specified by [RFC 6750](http://tools.ietf.org/html/rfc6750). Specifically, while RFC 6750 specifies the authentication heading to be:
+
+`Authorization: Bearer $TOKEN`
+
+Loopback omits the Bearer keyword, and so the header would look like this:
+
+`Authorization: $TOKEN`
+
+Loopback also supports `access_token` URL parameters in exactly the same way HTTP Bearer.
+
+This strategy supports both Loopback and RFC 6750 style authentication headers.
 
 By plugging into Passport, bearer token support can be easily and unobtrusively
 integrated into any application or framework that supports
 [Connect](http://www.senchalabs.org/connect/)-style middleware, including
 [Express](http://expressjs.com/).
-
----
-
-<p align="center">
-  <sup>Advertisement</sup>
-  <br>
-  <a href="https://click.linksynergy.com/link?id=D*o7yui4/NM&offerid=507388.1672410&type=2&murl=https%3A%2F%2Fwww.udemy.com%2Fcourse%2Fnodejs-express-mongodb-bootcamp%2F&u1=1Mxk3SNFcRAr3r8tfxCmy64nCmTFQ1TmsTeVpqTwkquLPYaKN">Node.js, Express, MongoDB & More: The Complete Bootcamp 2020</a><br>Master Node by building a real-world RESTful API and web app (with authentication, Node.js security, payments & more)
-</p>
-
----
-
-[![npm](https://img.shields.io/npm/v/passport-http-bearer.svg)](https://www.npmjs.com/package/passport-http-bearer)
-[![build](https://img.shields.io/travis/jaredhanson/passport-http-bearer.svg)](https://travis-ci.org/jaredhanson/passport-http-bearer)
-[![coverage](https://img.shields.io/coveralls/jaredhanson/passport-http-bearer.svg)](https://coveralls.io/github/jaredhanson/passport-http-bearer)
-[...](https://github.com/jaredhanson/passport-http-bearer/wiki/Status)
-
-## Install
-
-    $ npm install passport-http-bearer
 
 ## Usage
 
