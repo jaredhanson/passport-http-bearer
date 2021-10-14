@@ -15,7 +15,7 @@ describe('Strategy', function() {
     var status;
     
     before(function(done) {
-      chai.passport(strategy)
+      chai.passport.use(strategy)
         .fail(function(s) {
           status = s;
           done();
@@ -36,7 +36,7 @@ describe('Strategy', function() {
     var status;
     
     before(function(done) {
-      chai.passport(strategy)
+      chai.passport.use(strategy)
         .fail(function(s) {
           status = s;
           done();

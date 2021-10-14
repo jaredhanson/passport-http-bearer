@@ -16,7 +16,7 @@ describe('Strategy', function() {
       var challenge;
     
       before(function(done) {
-        chai.passport(strategy)
+        chai.passport.use(strategy)
           .fail(function(c) {
             challenge = c;
             done();
@@ -45,7 +45,7 @@ describe('Strategy', function() {
       var challenge;
     
       before(function(done) {
-        chai.passport(strategy)
+        chai.passport.use(strategy)
           .fail(function(c) {
             challenge = c;
             done();
@@ -74,7 +74,7 @@ describe('Strategy', function() {
       var challenge;
     
       before(function(done) {
-        chai.passport(strategy)
+        chai.passport.use(strategy)
           .fail(function(c) {
             challenge = c;
             done();
