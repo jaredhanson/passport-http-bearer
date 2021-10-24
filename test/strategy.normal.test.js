@@ -11,102 +11,83 @@ describe('Strategy', function() {
     return done(null, false);
   });
   
-  it('should authenticate request with token in header', function(done) {
+  describe('valid token', function() {
+    
     var strategy = new Strategy(function(token, cb) {
       expect(token).to.equal('mF_9.B5f-4.1JqM');
       return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
     });
-    
-    chai.passport.use(strategy)
-      .request(function(req) {
-        req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
-      })
-      .success(function(user, info) {
-        expect(user).to.deep.equal({ id: '248289761001' });
-        expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
-        done();
-      })
-      .authenticate();
-  });
   
-  describe('handling a request with valid token in form-encoded body parameter', function() {
-    var user
-      , info;
-    
-    before(function(done) {
+  
+    it('should authenticate request with token in header field', function(done) {
       chai.passport.use(strategy)
-        .success(function(u, i) {
-          user = u;
-          info = i;
+        .request(function(req) {
+          req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+        })
+        .success(function(user, info) {
+          expect(user).to.deep.equal({ id: '248289761001' });
+          expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
+          done();
+        })
+        .authenticate();
+    }); // should authenticate request with token in header field
+  
+    it('should authenticate request with token in form-encoded body parameter', function(done) {
+      chai.passport.use(strategy)
+        .success(function(user, info) {
+          expect(user).to.deep.equal({ id: '248289761001' });
+          expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
           done();
         })
         .request(function(req) {
           req.body = {};
-          req.body.access_token = 'vF9dft4qmT';
+          req.body.access_token = 'mF_9.B5f-4.1JqM';
         })
         .authenticate();
     });
     
-    it('should supply user', function() {
-      expect(user).to.be.an.object;
-      expect(user.id).to.equal('1234');
-    });
-    
-    it('should supply info', function() {
-      expect(info).to.be.an.object;
-      expect(info.scope).to.equal('read');
-    });
-  });
-  
-  describe('handling a request with valid credential in URI query parameter', function() {
-    var user
-      , info;
-    
-    before(function(done) {
+    it('should authenticate request with token in URI query parameter', function(done) {
       chai.passport.use(strategy)
-        .success(function(u, i) {
-          user = u;
-          info = i;
+        .success(function(user, info) {
+          expect(user).to.deep.equal({ id: '248289761001' });
+          expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
           done();
         })
         .request(function(req) {
           req.query = {};
-          req.query.access_token = 'vF9dft4qmT';
+          req.query.access_token = 'mF_9.B5f-4.1JqM';
         })
         .authenticate();
-    });
-    
-    it('should supply user', function() {
-      expect(user).to.be.an.object;
-      expect(user.id).to.equal('1234');
-    });
-    
-    it('should supply info', function() {
-      expect(info).to.be.an.object;
-      expect(info.scope).to.equal('read');
-    });
-  });
+    }); // should authenticate request with token in URI query parameter
   
-  describe('handling a request with wrong token in header', function() {
-    var challenge;
+  }); // valid token
+  
+  describe('invalid token', function() {
     
-    before(function(done) {
+    var strategy = new Strategy(function(token, cb) {
+      return cb(null, false);
+    });
+    
+    
+    it('should refuse request', function(done) {
       chai.passport.use(strategy)
-        .fail(function(c) {
-          challenge = c;
+        .fail(function(challenge, status) {
+          expect(challenge).to.equal('Bearer realm="Users", error="invalid_token"');
+          expect(status).to.be.undefined;
           done();
         })
         .request(function(req) {
-          req.headers.authorization = 'Bearer WRONG';
+          req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
         })
         .authenticate();
-    });
+    }); // should refuse request
     
-    it('should fail with challenge', function() {
-      expect(challenge).to.be.a.string;
-      expect(challenge).to.equal('Bearer realm="Users", error="invalid_token"');
-    });
-  });
+  }); // invalid token
+  
+  
+  
+  
+  
   
   describe('handling a request without credentials', function() {
     var challenge;
