@@ -76,7 +76,7 @@ describe('Strategy', function() {
       .authenticate();
   });
   
-  it('should refuse request with malformed authorization header', function(done) {
+  it('should refuse request with malformed header field', function(done) {
     chai.passport.use(strategy)
       .request(function(req) {
         req.headers['authorization'] = 'Bearer';
