@@ -41,7 +41,7 @@
     "make-node": "0.4.6",
     "mocha": "2.x.x",
     "chai": "2.x.x",
-    "chai-passport-strategy": "0.1.x"
+    "chai-passport-strategy": "2.x.x"
   },
   "engines": {
     "node": ">= 0.4.0"
