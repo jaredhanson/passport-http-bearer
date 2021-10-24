@@ -51,7 +51,7 @@ describe('verify function', function() {
         .authenticate();
     }); // should authenticate request with token in URI query parameter
     
-    it('should authenticate request with lowercase scheme in header field', function(done) {
+    it('should authenticate request with case-insensitive scheme in header field', function(done) {
       chai.passport.use(strategy)
         .request(function(req) {
           req.headers['authorization'] = 'bearer mF_9.B5f-4.1JqM';
@@ -62,7 +62,28 @@ describe('verify function', function() {
           done();
         })
         .authenticate();
-    }); // should authenticate request with lowercase scheme in header field
+    }); // should authenticate request with case-insensitive scheme in header field
+  
+    describe('that accepts request argument', function() {
+      var strategy = new Strategy({ passReqToCallback: true }, function(req, token, cb) {
+        expect(req.url).to.equal('/');
+        expect(token).to.equal('mF_9.B5f-4.1JqM');
+        return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
+      });
+  
+      it('should authenticate request', function(done) {
+        chai.passport.use(strategy)
+          .request(function(req) {
+            req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+          })
+          .success(function(user, info) {
+            expect(user).to.deep.equal({ id: '248289761001' });
+            expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
+            done();
+          })
+          .authenticate();
+      });
+    }); // that accepts request argument
   
   }); // that authenticates
   
