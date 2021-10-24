@@ -20,7 +20,7 @@ describe('Strategy', function() {
           status = s;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'Bearer';
         })
         .authenticate();
@@ -41,7 +41,7 @@ describe('Strategy', function() {
           status = s;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'BEARER vF9dft4qmT';
           req.query = {};
           req.query.access_token = "vF9dft4qmT";

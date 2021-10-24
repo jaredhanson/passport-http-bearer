@@ -21,7 +21,7 @@ describe('Strategy', function() {
             challenge = c;
             done();
           })
-          .req(function(req) {
+          .request(function(req) {
           })
           .authenticate();
       });
@@ -50,7 +50,7 @@ describe('Strategy', function() {
             challenge = c;
             done();
           })
-          .req(function(req) {
+          .request(function(req) {
           })
           .authenticate();
       });
@@ -79,7 +79,7 @@ describe('Strategy', function() {
             challenge = c;
             done();
           })
-          .req(function(req) {
+          .request(function(req) {
           })
           .authenticate();
       });

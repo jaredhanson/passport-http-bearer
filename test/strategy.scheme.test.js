@@ -22,7 +22,7 @@ describe('Strategy', function() {
           info = i;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'BEARER vF9dft4qmT';
         })
         .authenticate();
@@ -48,7 +48,7 @@ describe('Strategy', function() {
           challenge = c;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'BearerX vF9dft4qmT';
         })
         .authenticate();
@@ -69,7 +69,7 @@ describe('Strategy', function() {
           challenge = c;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'XBearer vF9dft4qmT';
         })
         .authenticate();
@@ -90,7 +90,7 @@ describe('Strategy', function() {
           challenge = c;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'XXXXX vF9dft4qmT';
         })
         .authenticate();

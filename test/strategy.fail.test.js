@@ -21,7 +21,7 @@ describe('Strategy', function() {
             challenge = c;
             done();
           })
-          .req(function(req) {
+          .request(function(req) {
             req.headers.authorization = 'Bearer WRONG';
           })
           .authenticate();
@@ -51,7 +51,7 @@ describe('Strategy', function() {
             challenge = c;
             done();
           })
-          .req(function(req) {
+          .request(function(req) {
             req.headers.authorization = 'Bearer WRONG';
           })
           .authenticate();

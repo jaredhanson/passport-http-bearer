@@ -22,7 +22,7 @@ describe('Strategy', function() {
           info = i;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'Bearer vF9dft4qmT';
         })
         .authenticate();
@@ -50,7 +50,7 @@ describe('Strategy', function() {
           info = i;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.body = {};
           req.body.access_token = 'vF9dft4qmT';
         })
@@ -79,7 +79,7 @@ describe('Strategy', function() {
           info = i;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.query = {};
           req.query.access_token = 'vF9dft4qmT';
         })
@@ -106,7 +106,7 @@ describe('Strategy', function() {
           challenge = c;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
           req.headers.authorization = 'Bearer WRONG';
         })
         .authenticate();
@@ -127,7 +127,7 @@ describe('Strategy', function() {
           challenge = c;
           done();
         })
-        .req(function(req) {
+        .request(function(req) {
         })
         .authenticate();
     });

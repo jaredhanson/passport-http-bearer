@@ -18,7 +18,7 @@ describe('Strategy', function() {
             err = e;
             done();
           })
-          .req(function(req) {
+          .request(function(req) {
             req.headers.authorization = 'Bearer vF9dft4qmT';
           })
           .authenticate();
