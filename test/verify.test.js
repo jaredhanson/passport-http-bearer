@@ -131,7 +131,7 @@ describe('verify function', function() {
     
     describe('with explanation as string', function() {
       
-      it('should refuse request', function(done) {
+      it('should challenge request', function(done) {
         var strategy = new Strategy(function(token, cb) {
           return cb(null, false, 'The access token expired');
         });
