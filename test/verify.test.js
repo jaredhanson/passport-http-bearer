@@ -17,7 +17,6 @@ describe('verify function', function() {
       return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
     });
   
-  
     it('should authenticate request with token in header field', function(done) {
       chai.passport.use(strategy)
         .request(function(req) {
@@ -66,7 +65,6 @@ describe('verify function', function() {
       return cb(null, false);
     });
     
-    
     it('should refuse request', function(done) {
       chai.passport.use(strategy)
         .request(function(req) {
@@ -79,6 +77,42 @@ describe('verify function', function() {
         })
         .authenticate();
     }); // should refuse request
+    
+    describe('with explanation', function() {
+      var strategy = new Strategy(function(token, cb) {
+        return cb(null, false, { message: 'The access token expired' });
+      });
+      
+      it('should refuse request', function(done) {
+        chai.passport.use(strategy)
+          .fail(function(challenge) {
+            expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
+            done();
+          })
+          .request(function(req) {
+            req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+          })
+          .authenticate();
+      });
+    }); // with explanation
+    
+    describe('with explanation as string', function() {
+      var strategy = new Strategy(function(token, cb) {
+        return cb(null, false, 'The access token expired');
+      });
+      
+      it('should refuse request', function(done) {
+        chai.passport.use(strategy)
+          .fail(function(challenge) {
+            expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
+            done();
+          })
+          .request(function(req) {
+            req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+          })
+          .authenticate();
+      });
+    }); // with explanation as string
     
   }); // that does not authenticate
   
