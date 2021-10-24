@@ -11,32 +11,22 @@ describe('Strategy', function() {
     return done(null, false);
   });
   
-  describe('handling a request with valid token in header', function() {
-    var user
-      , info;
-    
-    before(function(done) {
-      chai.passport.use(strategy)
-        .success(function(u, i) {
-          user = u;
-          info = i;
-          done();
-        })
-        .request(function(req) {
-          req.headers.authorization = 'Bearer vF9dft4qmT';
-        })
-        .authenticate();
+  it('should authenticate request with token in header', function(done) {
+    var strategy = new Strategy(function(token, cb) {
+      expect(token).to.equal('mF_9.B5f-4.1JqM');
+      return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
     });
     
-    it('should supply user', function() {
-      expect(user).to.be.an.object;
-      expect(user.id).to.equal('1234');
-    });
-    
-    it('should supply info', function() {
-      expect(info).to.be.an.object;
-      expect(info.scope).to.equal('read');
-    });
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+      })
+      .success(function(user, info) {
+        expect(user).to.deep.equal({ id: '248289761001' });
+        expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
+        done();
+      })
+      .authenticate();
   });
   
   describe('handling a request with valid token in form-encoded body parameter', function() {
