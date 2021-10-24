@@ -3,13 +3,6 @@ var Strategy = require('../lib/strategy');
 
 
 describe('verify function', function() {
-    
-  var strategy = new Strategy(function(token, done) {
-    if (token == 'vF9dft4qmT') { 
-      return done(null, { id: '1234' }, { scope: 'read' });
-    }
-    return done(null, false);
-  });
   
   describe('that authenticates', function() {
     var strategy = new Strategy(function(token, cb) {
@@ -115,5 +108,24 @@ describe('verify function', function() {
     }); // with explanation as string
     
   }); // that does not authenticate
+  
+  describe('that errors', function() {
+    var strategy = new Strategy(function(token, cb) {
+      return cb(new Error('something went wrong'));
+    });
+    
+    it('should error request', function(done) {
+      chai.passport.use(strategy)
+        .request(function(req) {
+          req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+        })
+        .error(function(err) {
+          expect(err).to.be.an.instanceof(Error);
+          expect(err.message).to.equal('something went wrong');
+          done();
+        })
+        .authenticate();
+    }); // should error request
+  });
   
 });
