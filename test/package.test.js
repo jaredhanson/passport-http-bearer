@@ -1,14 +1,14 @@
-var strategy = require('..');
+var pkg = require('..');
 
 describe('passport-http-bearer', function() {
     
   it('should export Strategy constructor directly from package', function() {
-    expect(strategy).to.be.a('function');
-    expect(strategy).to.equal(strategy.Strategy);
+    expect(pkg).to.be.a('function');
+    expect(pkg).to.equal(pkg.Strategy);
   });
   
   it('should export Strategy constructor', function() {
-    expect(strategy.Strategy).to.be.a('function');
+    expect(pkg.Strategy).to.be.a('function');
   });
   
 });
