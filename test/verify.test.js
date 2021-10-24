@@ -51,7 +51,7 @@ describe('verify function', function() {
         .authenticate();
     }); // should authenticate request with token in URI query parameter
     
-    it('should authenticate request with case-insensitive scheme in header field', function(done) {
+    it('should authenticate request with case-insensitive scheme', function(done) {
       chai.passport.use(strategy)
         .request(function(req) {
           req.headers['authorization'] = 'bearer mF_9.B5f-4.1JqM';
@@ -62,16 +62,17 @@ describe('verify function', function() {
           done();
         })
         .authenticate();
-    }); // should authenticate request with case-insensitive scheme in header field
+    }); // should authenticate request with case-insensitive scheme
   
     describe('that accepts request argument', function() {
-      var strategy = new Strategy({ passReqToCallback: true }, function(req, token, cb) {
-        expect(req.url).to.equal('/');
-        expect(token).to.equal('mF_9.B5f-4.1JqM');
-        return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
-      });
-  
+      
       it('should authenticate request', function(done) {
+        var strategy = new Strategy({ passReqToCallback: true }, function(req, token, cb) {
+          expect(req.url).to.equal('/');
+          expect(token).to.equal('mF_9.B5f-4.1JqM');
+          return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
+        });
+        
         chai.passport.use(strategy)
           .request(function(req) {
             req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
@@ -83,16 +84,18 @@ describe('verify function', function() {
           })
           .authenticate();
       });
+      
     }); // that accepts request argument
   
   }); // that authenticates
   
   describe('that does not authenticate', function() {
-    var strategy = new Strategy(function(token, cb) {
-      return cb(null, false);
-    });
     
     it('should challenge request', function(done) {
+      var strategy = new Strategy(function(token, cb) {
+        return cb(null, false);
+      });
+      
       chai.passport.use(strategy)
         .request(function(req) {
           req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
@@ -103,14 +106,15 @@ describe('verify function', function() {
           done();
         })
         .authenticate();
-    }); // should refuse request
+    }); // should challenge request
     
     describe('with explanation', function() {
-      var strategy = new Strategy(function(token, cb) {
-        return cb(null, false, { message: 'The access token expired' });
-      });
       
       it('should challenge request', function(done) {
+        var strategy = new Strategy(function(token, cb) {
+          return cb(null, false, { message: 'The access token expired' });
+        });
+        
         chai.passport.use(strategy)
           .fail(function(challenge, status) {
             expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
@@ -122,14 +126,16 @@ describe('verify function', function() {
           })
           .authenticate();
       });
+      
     }); // with explanation
     
     describe('with explanation as string', function() {
-      var strategy = new Strategy(function(token, cb) {
-        return cb(null, false, 'The access token expired');
-      });
       
       it('should refuse request', function(done) {
+        var strategy = new Strategy(function(token, cb) {
+          return cb(null, false, 'The access token expired');
+        });
+        
         chai.passport.use(strategy)
           .fail(function(challenge, status) {
             expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
@@ -141,16 +147,18 @@ describe('verify function', function() {
           })
           .authenticate();
       });
+      
     }); // with explanation as string
     
   }); // that does not authenticate
   
   describe('that errors', function() {
-    var strategy = new Strategy(function(token, cb) {
-      return cb(new Error('something went wrong'));
-    });
     
     it('should error request', function(done) {
+      var strategy = new Strategy(function(token, cb) {
+        return cb(new Error('something went wrong'));
+      });
+      
       chai.passport.use(strategy)
         .request(function(req) {
           req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
@@ -162,6 +170,7 @@ describe('verify function', function() {
         })
         .authenticate();
     }); // should error request
-  });
+    
+  }); // that errors
   
 });
