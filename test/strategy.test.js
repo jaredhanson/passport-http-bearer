@@ -13,7 +13,7 @@ describe('Strategy', function() {
     expect(strategy.name).to.equal('bearer');
   });
   
-  it('should refuse request without credentials', function(done) {
+  it('should challenge request without credentials', function(done) {
     chai.passport.use(strategy)
       .fail(function(challenge, status) {
         expect(challenge).to.equal('Bearer realm="Users"');
@@ -23,13 +23,40 @@ describe('Strategy', function() {
       .authenticate();
   });
   
-  it('should refuse request with malformed authorization header', function(done) {
+  it('should challenge request with non-bearer scheme', function(done) {
     chai.passport.use(strategy)
       .request(function(req) {
-        req.headers['authorization'] = 'Bearer';
+        req.headers['authorization'] = 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==';
       })
-      .fail(function(status) {
-        expect(status).to.equal(400);
+      .fail(function(challenge, status) {
+        expect(challenge).to.equal('Bearer realm="Users"');
+        expect(status).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  });
+  
+  it('should challenge request with scheme name differing by suffix', function(done) {
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.headers['authorization'] = 'Bearer2 mF_9.B5f-4.1JqM';
+      })
+      .fail(function(challenge, status) {
+        expect(challenge).to.equal('Bearer realm="Users"');
+        expect(status).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  });
+  
+  it('should challenge request with scheme name differing by prefix', function(done) {
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.headers['authorization'] = 'XBearer mF_9.B5f-4.1JqM';
+      })
+      .fail(function(challenge, status) {
+        expect(challenge).to.equal('Bearer realm="Users"');
+        expect(status).to.be.undefined;
         done();
       })
       .authenticate();
@@ -45,6 +72,18 @@ describe('Strategy', function() {
         req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
         req.query = {};
         req.query.access_token = 'mF_9.B5f-4.1JqM';
+      })
+      .authenticate();
+  });
+  
+  it('should refuse request with malformed authorization header', function(done) {
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.headers['authorization'] = 'Bearer';
+      })
+      .fail(function(status) {
+        expect(status).to.equal(400);
+        done();
       })
       .authenticate();
   });

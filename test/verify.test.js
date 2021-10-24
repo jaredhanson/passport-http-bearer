@@ -50,6 +50,19 @@ describe('verify function', function() {
         })
         .authenticate();
     }); // should authenticate request with token in URI query parameter
+    
+    it('should authenticate request with lowercase scheme in header field', function(done) {
+      chai.passport.use(strategy)
+        .request(function(req) {
+          req.headers['authorization'] = 'bearer mF_9.B5f-4.1JqM';
+        })
+        .success(function(user, info) {
+          expect(user).to.deep.equal({ id: '248289761001' });
+          expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
+          done();
+        })
+        .authenticate();
+    }); // should authenticate request with lowercase scheme in header field
   
   }); // that authenticates
   
@@ -58,7 +71,7 @@ describe('verify function', function() {
       return cb(null, false);
     });
     
-    it('should refuse request', function(done) {
+    it('should challenge request', function(done) {
       chai.passport.use(strategy)
         .request(function(req) {
           req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
@@ -76,10 +89,11 @@ describe('verify function', function() {
         return cb(null, false, { message: 'The access token expired' });
       });
       
-      it('should refuse request', function(done) {
+      it('should challenge request', function(done) {
         chai.passport.use(strategy)
-          .fail(function(challenge) {
+          .fail(function(challenge, status) {
             expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
+            expect(status).to.be.undefined;
             done();
           })
           .request(function(req) {
@@ -96,8 +110,9 @@ describe('verify function', function() {
       
       it('should refuse request', function(done) {
         chai.passport.use(strategy)
-          .fail(function(challenge) {
+          .fail(function(challenge, status) {
             expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
+            expect(status).to.be.undefined;
             done();
           })
           .request(function(req) {
