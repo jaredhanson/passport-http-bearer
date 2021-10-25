@@ -64,28 +64,28 @@ describe('Strategy', function() {
   
   it('should refuse request with token transmitted in both header field and form-encoded body parameter', function(done) {
     chai.passport.use(strategy)
-      .fail(function(status) {
-        expect(status).to.equal(400);
-        done();
-      })
       .request(function(req) {
         req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
         req.body = {};
         req.body.access_token = 'mF_9.B5f-4.1JqM';
+      })
+      .fail(function(status) {
+        expect(status).to.equal(400);
+        done();
       })
       .authenticate();
   });
   
   it('should refuse request with token transmitted in both header field and URI query parameter', function(done) {
     chai.passport.use(strategy)
-      .fail(function(status) {
-        expect(status).to.equal(400);
-        done();
-      })
       .request(function(req) {
         req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
         req.query = {};
         req.query.access_token = 'mF_9.B5f-4.1JqM';
+      })
+      .fail(function(status) {
+        expect(status).to.equal(400);
+        done();
       })
       .authenticate();
   });

@@ -116,13 +116,13 @@ describe('verify function', function() {
         });
         
         chai.passport.use(strategy)
+          .request(function(req) {
+            req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+          })
           .fail(function(challenge, status) {
             expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
             expect(status).to.be.undefined;
             done();
-          })
-          .request(function(req) {
-            req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
           })
           .authenticate();
       });
@@ -137,13 +137,13 @@ describe('verify function', function() {
         });
         
         chai.passport.use(strategy)
+          .request(function(req) {
+            req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+          })
           .fail(function(challenge, status) {
             expect(challenge).to.equal('Bearer realm="Users", error="invalid_token", error_description="The access token expired"');
             expect(status).to.be.undefined;
             done();
-          })
-          .request(function(req) {
-            req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
           })
           .authenticate();
       });
