@@ -14,23 +14,27 @@
     "token",
     "oauth"
   ],
+  "author": {
+    "name": "Jared Hanson",
+    "email": "jaredhanson@gmail.com",
+    "url": "https://www.jaredhanson.me/"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/jaredhanson/passport-http-bearer.git"
   },
   "bugs": {
-    "url": "http://github.com/jaredhanson/passport-http-bearer/issues"
+    "url": "https://github.com/jaredhanson/passport-http-bearer/issues"
   },
-  "author": {
-    "name": "Jared Hanson",
-    "email": "jaredhanson@gmail.com",
-    "url": "http://www.jaredhanson.net/"
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/jaredhanson"
   },
   "license": "MIT",
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT"
+      "url": "https://opensource.org/licenses/MIT"
     }
   ],
   "main": "./lib",
