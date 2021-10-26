@@ -102,55 +102,47 @@ describe('Strategy', function() {
       .authenticate();
   });
   
-  describe('with realm option', function() {
-    
-    it('should challenge request with realm', function(done) {
-      var strategy = new Strategy({ realm: 'example' }, function(token, cb) {
-        throw new Error('verify function should not be called');
-      });
-      
-      chai.passport.use(strategy)
-        .fail(function(challenge, status) {
-          expect(challenge).to.equal('Bearer realm="example"');
-          expect(status).to.be.undefined;
-          done();
-        })
-        .authenticate();
+  it('should challenge request with realm', function(done) {
+    var strategy = new Strategy({ realm: 'example' }, function(token, cb) {
+      throw new Error('verify function should not be called');
     });
     
-  }); // with realm option
+    chai.passport.use(strategy)
+      .fail(function(challenge, status) {
+        expect(challenge).to.equal('Bearer realm="example"');
+        expect(status).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  });
   
-  describe('with scope option', function() {
-    
-    it('should challenge request with scope as array', function(done) {
-      var strategy = new Strategy({ scope: ['profile', 'email']  }, function(token, cb) {
-        throw new Error('verify function should not be called');
-      });
-      
-      chai.passport.use(strategy)
-        .fail(function(challenge, status) {
-          expect(challenge).to.equal('Bearer realm="Users", scope="profile email"');
-          expect(status).to.be.undefined;
-          done();
-        })
-        .authenticate();
+  it('should challenge request with scope as array', function(done) {
+    var strategy = new Strategy({ scope: ['profile', 'email']  }, function(token, cb) {
+      throw new Error('verify function should not be called');
     });
     
-    it('should challenge request with scope as string', function(done) {
-      var strategy = new Strategy({ scope: 'profile' }, function(token, cb) {
-        throw new Error('verify function should not be called');
-      });
-      
-      chai.passport.use(strategy)
-        .fail(function(challenge, status) {
-          expect(challenge).to.equal('Bearer realm="Users", scope="profile"');
-          expect(status).to.be.undefined;
-          done();
-        })
-        .authenticate();
+    chai.passport.use(strategy)
+      .fail(function(challenge, status) {
+        expect(challenge).to.equal('Bearer realm="Users", scope="profile email"');
+        expect(status).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  });
+  
+  it('should challenge request with scope as string', function(done) {
+    var strategy = new Strategy({ scope: 'profile' }, function(token, cb) {
+      throw new Error('verify function should not be called');
     });
     
-  }); // with scope option
+    chai.passport.use(strategy)
+      .fail(function(challenge, status) {
+        expect(challenge).to.equal('Bearer realm="Users", scope="profile"');
+        expect(status).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  });
   
   it('should throw if constructed without a verify callback', function() {
     expect(function() {
