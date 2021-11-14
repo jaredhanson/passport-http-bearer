@@ -62,6 +62,18 @@ describe('Strategy', function() {
       .authenticate();
   });
   
+  it('should refuse request with with bearer scheme that lacks token', function(done) {
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.headers['authorization'] = 'Bearer';
+      })
+      .fail(function(status) {
+        expect(status).to.equal(400);
+        done();
+      })
+      .authenticate();
+  });
+  
   it('should refuse request with token transmitted in both header field and form-encoded body parameter', function(done) {
     chai.passport.use(strategy)
       .request(function(req) {
@@ -90,10 +102,13 @@ describe('Strategy', function() {
       .authenticate();
   });
   
-  it('should refuse request with malformed header field', function(done) {
+  it('should refuse request with token transmitted in both form-encoded body parameter and URI query parameter', function(done) {
     chai.passport.use(strategy)
       .request(function(req) {
-        req.headers['authorization'] = 'Bearer';
+        req.body = {};
+        req.body.access_token = 'mF_9.B5f-4.1JqM';
+        req.query = {};
+        req.query.access_token = 'mF_9.B5f-4.1JqM';
       })
       .fail(function(status) {
         expect(status).to.equal(400);
