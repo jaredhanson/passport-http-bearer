@@ -51,7 +51,7 @@
     "node": ">= 0.4.0"
   },
   "scripts": {
-    "test": "make test"
+    "test": "mocha --require ./test/bootstrap/node --recursive"
   },
   "testling": {
     "browsers": [
