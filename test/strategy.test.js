@@ -229,10 +229,10 @@ describe('Strategy', function() {
       .authenticate();
   });
   
-  it('should throw if constructed without a verify callback', function() {
+  it('should throw if constructed without a verify function', function() {
     expect(function() {
       new Strategy();
-    }).to.throw(TypeError, 'HTTPBearerStrategy requires a verify callback');
+    }).to.throw(TypeError, 'HTTPBearerStrategy requires a verify function');
   });
   
 });
