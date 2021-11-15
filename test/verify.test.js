@@ -10,7 +10,7 @@ describe('verify function', function() {
       return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
     });
   
-    it('should authenticate request with token in header field', function(done) {
+    it('should authenticate request with additional info', function(done) {
       chai.passport.use(strategy)
         .request(function(req) {
           req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
@@ -22,47 +22,6 @@ describe('verify function', function() {
         })
         .authenticate();
     }); // should authenticate request with token in header field
-  
-    it('should authenticate request with token in form-encoded body parameter', function(done) {
-      chai.passport.use(strategy)
-        .request(function(req) {
-          req.body = {};
-          req.body.access_token = 'mF_9.B5f-4.1JqM';
-        })
-        .success(function(user, info) {
-          expect(user).to.deep.equal({ id: '248289761001' });
-          expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
-          done();
-        })
-        .authenticate();
-    }); // should authenticate request with token in form-encoded body parameter
-    
-    it('should authenticate request with token in URI query parameter', function(done) {
-      chai.passport.use(strategy)
-        .request(function(req) {
-          req.query = {};
-          req.query.access_token = 'mF_9.B5f-4.1JqM';
-        })
-        .success(function(user, info) {
-          expect(user).to.deep.equal({ id: '248289761001' });
-          expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
-          done();
-        })
-        .authenticate();
-    }); // should authenticate request with token in URI query parameter
-    
-    it('should authenticate request with case-insensitive scheme', function(done) {
-      chai.passport.use(strategy)
-        .request(function(req) {
-          req.headers['authorization'] = 'bearer mF_9.B5f-4.1JqM';
-        })
-        .success(function(user, info) {
-          expect(user).to.deep.equal({ id: '248289761001' });
-          expect(info).to.deep.equal({ scope: [ 'profile', 'email' ] });
-          done();
-        })
-        .authenticate();
-    }); // should authenticate request with case-insensitive scheme
     
     it('should accept request argument and authenticate request', function(done) {
       var strategy = new Strategy({ passReqToCallback: true }, function(req, token, cb) {

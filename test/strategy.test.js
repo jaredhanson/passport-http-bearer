@@ -13,6 +13,76 @@ describe('Strategy', function() {
     expect(strategy.name).to.equal('bearer');
   });
   
+  it('should authenticate request with bearer scheme', function(done) {
+    var strategy = new Strategy(function(token, cb) {
+      return cb(null, { id: '248289761001' });
+    });
+    
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+      })
+      .success(function(user, info) {
+        expect(user).to.deep.equal({ id: '248289761001' });
+        expect(info).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  }); // should authenticate request with bearer scheme
+  
+  it('should authenticate request with case-insensitive bearer scheme', function(done) {
+    var strategy = new Strategy(function(token, cb) {
+      return cb(null, { id: '248289761001' });
+    });
+    
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.headers['authorization'] = 'bearer mF_9.B5f-4.1JqM';
+      })
+      .success(function(user, info) {
+        expect(user).to.deep.equal({ id: '248289761001' });
+        expect(info).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  }); // should authenticate request with case-insensitive bearer scheme
+  
+  it('should authenticate request with token in form-encoded body parameter', function(done) {
+    var strategy = new Strategy(function(token, cb) {
+      return cb(null, { id: '248289761001' });
+    });
+    
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.body = {};
+        req.body.access_token = 'mF_9.B5f-4.1JqM';
+      })
+      .success(function(user, info) {
+        expect(user).to.deep.equal({ id: '248289761001' });
+        expect(info).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  }); // should authenticate request with token in form-encoded body parameter
+  
+  it('should authenticate request with token in URI query parameter', function(done) {
+    var strategy = new Strategy(function(token, cb) {
+      return cb(null, { id: '248289761001' });
+    });
+    
+    chai.passport.use(strategy)
+      .request(function(req) {
+        req.query = {};
+        req.query.access_token = 'mF_9.B5f-4.1JqM';
+      })
+      .success(function(user, info) {
+        expect(user).to.deep.equal({ id: '248289761001' });
+        expect(info).to.be.undefined;
+        done();
+      })
+      .authenticate();
+  }); // should authenticate request with token in URI query parameter
+  
   it('should challenge request without credentials', function(done) {
     chai.passport.use(strategy)
       .fail(function(challenge, status) {
