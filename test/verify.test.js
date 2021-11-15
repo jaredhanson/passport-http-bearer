@@ -5,12 +5,31 @@ var Strategy = require('../lib/strategy');
 describe('verify function', function() {
   
   describe('that authenticates', function() {
-    var strategy = new Strategy(function(token, cb) {
-      expect(token).to.equal('mF_9.B5f-4.1JqM');
-      return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
-    });
+  
+    it('should authenticate request', function(done) {
+      var strategy = new Strategy(function(token, cb) {
+        expect(token).to.equal('mF_9.B5f-4.1JqM');
+        return cb(null, { id: '248289761001' });
+      });
+      
+      chai.passport.use(strategy)
+        .request(function(req) {
+          req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
+        })
+        .success(function(user, info) {
+          expect(user).to.deep.equal({ id: '248289761001' });
+          expect(info).to.be.undefined;
+          done();
+        })
+        .authenticate();
+    }); // should authenticate request
   
     it('should authenticate request with additional info', function(done) {
+      var strategy = new Strategy(function(token, cb) {
+        expect(token).to.equal('mF_9.B5f-4.1JqM');
+        return cb(null, { id: '248289761001' }, { scope: [ 'profile', 'email' ] });
+      });
+      
       chai.passport.use(strategy)
         .request(function(req) {
           req.headers['authorization'] = 'Bearer mF_9.B5f-4.1JqM';
@@ -21,7 +40,7 @@ describe('verify function', function() {
           done();
         })
         .authenticate();
-    }); // should authenticate request with token in header field
+    }); // should authenticate request with additional info
     
     it('should accept request argument and authenticate request', function(done) {
       var strategy = new Strategy({ passReqToCallback: true }, function(req, token, cb) {
