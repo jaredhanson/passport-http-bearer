@@ -31,6 +31,12 @@ integrated into any application or framework that supports
 
     $ npm install passport-http-bearer
 
+#### TypeScript support
+
+```bash
+$ npm install @types/passport-http-bearer
+```
+
 ## Usage
 
 #### Configure Strategy
