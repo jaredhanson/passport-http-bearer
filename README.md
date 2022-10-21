@@ -1,16 +1,13 @@
 # passport-http-bearer
 
-HTTP Bearer authentication strategy for [Passport](http://passportjs.org/).
+HTTP Bearer authentication strategy for [Passport](https://www.passportjs.org/).
 
 This module lets you authenticate HTTP requests using [bearer tokens](https://www.passportjs.org/concepts/bearer-token/),
-as specified by [RFC 6750](http://tools.ietf.org/html/rfc6750), in your Node.js
-applications.  Bearer tokens are typically used to protect API endpoints, and are
-often issued using OAuth 2.0.
-
-By plugging into Passport, bearer token support can be easily and unobtrusively
-integrated into any application or framework that supports
-[Connect](http://www.senchalabs.org/connect/)-style middleware, including
-[Express](http://expressjs.com/).
+as specified by [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750), in your
+Node.js applications.  By plugging into Passport, bearer token support can be
+easily and unobtrusively integrated into any application or framework that
+supports [Connect](https://github.com/senchalabs/connect#readme)-style
+middleware, including [Express](https://expressjs.com/).
 
 <div align="center">
 
