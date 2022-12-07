@@ -11,6 +11,7 @@ middleware, including [Express](https://expressjs.com/).
 
 <div align="center">
 
+:hammer_and_wrench: [API Reference](https://www.passportjs.org/api/passport-http-bearer/1.x/?utm_source=github&utm_medium=referral&utm_campaign=passport-http-bearer&utm_content=nav-api) •
 :heart: [Sponsors](https://www.passportjs.org/sponsors/?utm_source=github&utm_medium=referral&utm_campaign=passport-http-bearer&utm_content=nav-sponsors)
 
 </div>
