@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "make-node": "0.4.6",
-    "mocha": "2.x.x",
+    "mocha": "10.x.x",
     "chai": "2.x.x",
     "chai-passport-strategy": "3.x.x"
   },
