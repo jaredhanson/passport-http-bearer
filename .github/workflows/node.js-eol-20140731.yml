@@ -37,7 +37,7 @@ jobs:
     #- run: npm conf set registry="http://registry.npmjs.org/"
     #- run: npm config set strict-ssl false
     - run: npm cache clean
-    - run: cat ~/.npmrc
+    #- run: cat ~/.npmrc
     - run: npm config list
     - run: npm config list -l
     - run: which npm
