@@ -594,6 +594,7 @@ Request.prototype.start = function () {
   console.log('! MAKE REQ');
   console.log(self.uri.href)
   console.log(reqOptions)
+  reqOptions.secureProtocol = 'foo'
   self.req = self.httpModule.request(reqOptions, self.onResponse.bind(self))
 
   if (self.timeout && !self.timeoutTimer) {
