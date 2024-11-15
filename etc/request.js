@@ -593,6 +593,7 @@ Request.prototype.start = function () {
   debug('make request', self.uri.href)
   console.log('! MAKE REQ');
   console.log(self.uri.href)
+  console.log(reqOptions)
   self.req = self.httpModule.request(reqOptions, self.onResponse.bind(self))
 
   if (self.timeout && !self.timeoutTimer) {
