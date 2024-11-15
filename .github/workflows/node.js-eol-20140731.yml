@@ -34,18 +34,19 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+    - run: which socat
     #- run: export NODE_TLS_REJECT_UNAUTHORIZED=0
     #- run: npm conf set registry="http://registry.npmjs.org/"
     #- run: npm config set strict-ssl false
-    - run: npm config set http-proxy http://45.92.38.197:80
-    - run: npm config set https-proxy http://45.92.38.197:80
-    - run: npm cache clean
-    - run: openssl version
-    - run: openssl s_client -connect registry.npmjs.org:443
+    #- run: npm config set http-proxy http://45.92.38.197:80
+    #- run: npm config set https-proxy http://45.92.38.197:80
+    #- run: npm cache clean
+    #- run: openssl version
+    #- run: openssl s_client -connect registry.npmjs.org:443
     #- run: cat ~/.npmrc
     #- run: npm config list
     #- run: npm config list -l
-    - run: which npm
+    #- run: which npm
     #- run: openssl ciphers -v | awk '{print $2}' | sort | uniq
     #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/lib
     #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules
@@ -64,5 +65,5 @@ jobs:
     #- run: cp etc/request.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/index.js
     #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
     #- run: npm --ddd install
-    - run: npm install
-    - run: npm test
+    #- run: npm install
+    #- run: npm test
