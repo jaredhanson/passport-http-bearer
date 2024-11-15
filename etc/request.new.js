@@ -1,3 +1,5 @@
+console.log('LOADED NPM REQUEST');
+
 module.exports = regRequest
 
 var url = require("url")
