@@ -3,7 +3,7 @@ var https = require('https')
 
 console.log(https.globalAgent.options)
 //https.globalAgent.options.securityOptions = 'SSL_OP_NO_SSLv3'
-https.globalAgent.options.secureProtocol = 'SSLv3_method'
+https.globalAgent.options.secureProtocol = 'SSLv3_methodx'
 //https.globalAgent.options.secureProtocol = 'TLSv1_method'
 
 
