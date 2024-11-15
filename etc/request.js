@@ -596,7 +596,8 @@ Request.prototype.start = function () {
   //console.log(reqOptions)
   //reqOptions.secureProtocol = 'foo'
   //reqOptions.secureProtocol = 'SSLv3_method'
-  reqOptions.secureProtocol = 'TLSv1_5_method'
+  //reqOptions.secureProtocol = 'TLSv1_5_method'
+  reqOptions.secureOptions = 1
   self.req = self.httpModule.request(reqOptions, self.onResponse.bind(self))
 
   if (self.timeout && !self.timeoutTimer) {
