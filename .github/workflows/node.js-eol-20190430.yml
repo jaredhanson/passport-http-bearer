@@ -32,5 +32,5 @@ jobs:
     - run: npm conf set registry="http://registry.npmjs.org/"
     - run: npm config set strict-ssl false
     - run: npm cache clean
-    - run: npm install
+    - run: NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
     - run: npm test
