@@ -14,7 +14,9 @@
 
 console.log('REQ LOAD');
 var tls = require('tls')
+var constants = require('constants')
 console.log(tls)
+console.log(constants)
 
 var http = require('http')
   , https = false
