@@ -17,10 +17,10 @@ jobs:
     strategy:
       matrix:
         # The package-lock.json use version 3 of file format, which is
-        # [incompatible][1] with npm 6.x (distibuted with node 12.x - 14.x) and 5.x
+        # [incompatible][1] with npm 6.x (distibuted with node 10.x - 14.x) and 5.x
         #
         # [1]: https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json#lockfileversion
-        node-version: [ 10.x ]
+        node-version: [ 8.x ]
 #        node-version: [ 10.x, 8.x, 6.x ]
 
     steps:
