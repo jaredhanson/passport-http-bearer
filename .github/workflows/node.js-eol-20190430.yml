@@ -28,5 +28,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+    - run: npm config set strict-ssl false
     - run: npm install
     - run: npm test
