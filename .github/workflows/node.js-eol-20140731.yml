@@ -33,9 +33,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - run: export NODE_TLS_REJECT_UNAUTHORIZED=0
-    - run: npm conf set registry="http://registry.npmjs.org/"
-    - run: npm config set strict-ssl false
+    #- run: export NODE_TLS_REJECT_UNAUTHORIZED=0
+    #- run: npm conf set registry="http://registry.npmjs.org/"
+    #- run: npm config set strict-ssl false
     - run: npm cache clean
     - run: cat ~/.npmrc
     - run: npm config list
