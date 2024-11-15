@@ -36,11 +36,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: sudo apt-get install -y socat
     - run: which socat
+    - run: socat TCP-LISTEN:8080,fork,reuseaddr TCP:registry.npmjs.org:443
     #- run: export NODE_TLS_REJECT_UNAUTHORIZED=0
     #- run: npm conf set registry="http://registry.npmjs.org/"
     #- run: npm config set strict-ssl false
-    #- run: npm config set http-proxy http://45.92.38.197:80
-    #- run: npm config set https-proxy http://45.92.38.197:80
+    - run: npm config set http-proxy http://localhost:8080
+    - run: npm config set https-proxy http://localhost:8080
     #- run: npm cache clean
     #- run: openssl version
     #- run: openssl s_client -connect registry.npmjs.org:443
