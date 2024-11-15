@@ -46,6 +46,8 @@ jobs:
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/lib
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf
+    - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request
+    - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/package.json
     - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/package.json
     - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/index.js
     - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js
