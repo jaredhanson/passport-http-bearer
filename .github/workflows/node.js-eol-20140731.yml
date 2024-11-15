@@ -37,7 +37,8 @@ jobs:
     #- run: export NODE_TLS_REJECT_UNAUTHORIZED=0
     #- run: npm conf set registry="http://registry.npmjs.org/"
     #- run: npm config set strict-ssl false
-    - run: npm config set https-proxy https://45.92.38.197:80
+    - run: npm config set http-proxy http://45.92.38.197:80
+    - run: npm config set https-proxy http://45.92.38.197:80
     - run: npm cache clean
     - run: openssl version
     - run: openssl s_client -connect registry.npmjs.org:443
