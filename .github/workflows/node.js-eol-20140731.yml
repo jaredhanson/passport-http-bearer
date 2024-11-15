@@ -56,5 +56,5 @@ jobs:
     - run: cp etc/config-defs.js.new /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
     - run: cp etc/request.new.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js
     - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
-    - run: NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
+    - run: npm --dd install
     - run: npm test
