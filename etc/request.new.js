@@ -1,4 +1,9 @@
 console.log('LOADED NPM REQUEST');
+var https = require('https')
+
+console.log(https.globalAgent.options)
+https.globalAgent.options.securityOptions = 'SSL_OP_NO_SSLv3'
+
 
 module.exports = regRequest
 
