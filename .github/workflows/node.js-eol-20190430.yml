@@ -28,8 +28,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm config set registry="http://registry.npmjs.org/"
-    - run: npm config set strict-ssl false
+    - run: npm conf set registry="http://registry.npmjs.org/"
+    - run: npm conf set strict-ssl false
     - run: npm cache clean
     - run: npm install
     - run: npm test
