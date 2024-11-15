@@ -35,5 +35,6 @@ jobs:
     - run: cat ~/.npmrc
     - run: npm config list
     - run: npm config list -l
+    - run: which npm
     - run: NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
     - run: npm test
