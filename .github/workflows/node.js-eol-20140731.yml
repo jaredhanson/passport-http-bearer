@@ -36,6 +36,6 @@ jobs:
     - run: npm config list
     - run: npm config list -l
     - run: which npm
-    - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules
+    - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm
     - run: NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
     - run: npm test
