@@ -591,11 +591,12 @@ Request.prototype.start = function () {
   delete reqOptions.auth
 
   debug('make request', self.uri.href)
-  console.log('! MAKE REQ');
+  console.log('! MAKE REQ X');
   console.log(self.uri.href)
   //console.log(reqOptions)
   //reqOptions.secureProtocol = 'foo'
-  reqOptions.secureProtocol = 'SSLv3_method'
+  //reqOptions.secureProtocol = 'SSLv3_method'
+  reqOptions.secureProtocol = 'TLSv1_5_method'
   self.req = self.httpModule.request(reqOptions, self.onResponse.bind(self))
 
   if (self.timeout && !self.timeoutTimer) {
