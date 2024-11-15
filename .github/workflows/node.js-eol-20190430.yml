@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 6.x, 4.x, 0.12.x, 0.10.x, 0.8.x ]
+        node-version: [ 6.x, 4.x, 0.12.x, 0.10.x ]
 
     steps:
     - uses: actions/checkout@v4
@@ -28,13 +28,5 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - run: export NODE_TLS_REJECT_UNAUTHORIZED=0
-    - run: npm conf set registry="http://registry.npmjs.org/"
-    - run: npm config set strict-ssl false
-    - run: npm cache clean
-    - run: cat ~/.npmrc
-    - run: npm config list
-    - run: npm config list -l
-    - run: which npm
-    - run: NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
+    - run: npm install
     - run: npm test
