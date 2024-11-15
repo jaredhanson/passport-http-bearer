@@ -17,7 +17,7 @@ var tls = require('tls')
 var constants = require('constants')
 console.log(tls)
 console.log(constants)
-console.log(tls.getCiphers())
+//console.log(tls.getCiphers())
 
 var http = require('http')
   , https = false
@@ -604,7 +604,9 @@ Request.prototype.start = function () {
   //reqOptions.secureProtocol = 'foo'
   //reqOptions.secureProtocol = 'SSLv3_method'
   //reqOptions.secureProtocol = 'TLSv1_5_method'
-  reqOptions.secureOptions = 1
+  // https://stackoverflow.com/questions/31201029/how-to-disable-tls-1-0-and-use-only-tls-1-1-using-nodejs
+  reqOptions.secureProtocol = 'TLSv1_2_server_method'
+  //reqOptions.secureOptions = 1
   self.req = self.httpModule.request(reqOptions, self.onResponse.bind(self))
 
   if (self.timeout && !self.timeoutTimer) {
