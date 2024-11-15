@@ -47,6 +47,9 @@ jobs:
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf
     - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/package.json
+    - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/index.js
+    - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js
+    - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib
     #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/initialize.js
     - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
