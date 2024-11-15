@@ -1,5 +1,9 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# This workflow performs continuous integration on node 8.x - 14.x, the last of
+# which reached end-of-life on 2023-04-30 according to the [release schedule][1]
+# published by the [release working group][2].
+#
+# [1]: https://github.com/nodejs/release/blob/main/schedule.json
+# [2]: https://github.com/nodejs/release
 
 name: "Node.js CI (EOL: 2023-04-30)"
 
@@ -16,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        # The package-lock.json use version 3 of file format, which is
+        # The package-lock.json use version 3 of the file format, which is
         # [incompatible][1] with npm 6.x (distibuted with node 8.x - 14.x).
         #
         # [1]: https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json#lockfileversion
@@ -28,5 +32,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+    # Ideally, `npm ci` would be run.  However, that command [fails][1] because
+    # lockfileVersion@3 is in use.  `npm install` is run as a workaround.
+    #
+    # [1]: https://stackoverflow.com/questions/76253884/npm-ci-command-failing-with-cannot-read-property-angular-animations-of-undef
     - run: npm install
     - run: npm test
