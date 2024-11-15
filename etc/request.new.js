@@ -121,6 +121,7 @@ function regRequest (method, where, what, etag, nofollow, reauthed, cb_) {
 
   var self = this
   operation.attempt(function (currentAttempt) {
+      console.log('we are here 1');
     self.log.info("trying", "registry request attempt " + currentAttempt
         + " at " + (new Date()).toLocaleTimeString())
     makeRequest.call(self, method, remote, where, what, etag, nofollow, token
