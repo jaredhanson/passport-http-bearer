@@ -23,6 +23,9 @@ jobs:
         node-version: [ 0.8.x ]
 
 # https://github.com/npm/npm/issues/20191
+# openssl s_client -showcerts -connect registry.npmjs.org:443
+# openssl s_client -connect www.google.com:443 2>/dev/null </dev/null |  sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
+# openssl s_client -showcerts -connect registry.npmjs.org:443 2>/dev/null </dev/null |  sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
 
     steps:
     - uses: actions/checkout@v4
@@ -38,6 +41,7 @@ jobs:
     - run: npm config list
     - run: npm config list -l
     - run: which npm
+    - run: openssl ciphers -v | awk '{print $2}' | sort | uniq
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/lib
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules
     - run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf
