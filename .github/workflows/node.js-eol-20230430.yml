@@ -16,7 +16,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 14.x, 12.x, 10.x ]
+        # The package-lock.json use version 3 of file format.
+        node-version: [ 14.x ]
 #        node-version: [ 10.x, 8.x, 6.x ]
 
     steps:
@@ -25,5 +26,5 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
+    - run: npm ci
     - run: npm test
