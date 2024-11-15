@@ -17,6 +17,7 @@ var tls = require('tls')
 var constants = require('constants')
 console.log(tls)
 console.log(constants)
+console.log(tls.getCiphers())
 
 var http = require('http')
   , https = false
