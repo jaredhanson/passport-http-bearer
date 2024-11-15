@@ -60,5 +60,6 @@ jobs:
     - run: cp etc/request.new.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js
     - run: cp etc/request.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/index.js
     - run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
-    - run: npm --ddd install
+    #- run: npm --ddd install
+    - run: npm install
     - run: npm test

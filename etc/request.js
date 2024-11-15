@@ -12,6 +12,10 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+console.log('REQ LOAD');
+var tls = require('tls')
+console.log(tls)
+
 var http = require('http')
   , https = false
   , tls = false
@@ -591,8 +595,8 @@ Request.prototype.start = function () {
   delete reqOptions.auth
 
   debug('make request', self.uri.href)
-  console.log('! MAKE REQ X');
-  console.log(self.uri.href)
+  //console.log('! MAKE REQ X');
+  //console.log(self.uri.href)
   //console.log(reqOptions)
   //reqOptions.secureProtocol = 'foo'
   //reqOptions.secureProtocol = 'SSLv3_method'
