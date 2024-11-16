@@ -30,8 +30,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: sudo apt-get install -y stunnel
     - run: stunnel etc/stunnel.conf
-    - run: sleep 5
-    - run: cat /home/runner/work/passport-http-bearer/passport-http-bearer/stunnel.log
     #- run: ls /var/log
     #- run: cat /home/runner/work/passport-http-bearer/passport-http-bearer/stunnel.log
     #- run: curl http://registry.npmjs.org/passport-strategy --proxy http://127.0.0.1:8086
@@ -42,5 +40,4 @@ jobs:
     - run: npm config set https-proxy http://localhost:8086
     - run: npm config set strict-ssl false
     - run: npm install
-    - run: cat /home/runner/work/passport-http-bearer/passport-http-bearer/stunnel.log
-      if: always()
+    - run: npm test
