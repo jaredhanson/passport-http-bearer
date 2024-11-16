@@ -41,7 +41,7 @@ jobs:
     #- run: socat TCP-LISTEN:8080,fork,reuseaddr ssl:registry.npmjs.org:443 &
     
     #- run: export NODE_TLS_REJECT_UNAUTHORIZED=0
-    - run: npm conf set registry="http://registry.npmjs.org/"
+    #- run: npm config set registry="http://registry.npmjs.org/"
     #- run: npm config set strict-ssl false
     - run: npm config set http-proxy http://localhost:8080
     - run: npm config set https-proxy http://localhost:8080
@@ -50,7 +50,7 @@ jobs:
     #- run: openssl s_client -connect registry.npmjs.org:443
     #- run: cat ~/.npmrc
     #- run: npm config list
-    #- run: npm config list -l
+    - run: npm config list -l
     #- run: which npm
     #- run: openssl ciphers -v | awk '{print $2}' | sort | uniq
     #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/lib
@@ -67,7 +67,7 @@ jobs:
     #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
     #- run: cp etc/config-defs.js.new /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
     #- run: cp etc/request.new.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js
-    - run: cp etc/request.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/index.js
+    #- run: cp etc/request.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/index.js
     #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
     - run: npm --ddd install
     #- run: npm install
