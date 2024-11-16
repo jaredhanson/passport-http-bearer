@@ -40,6 +40,6 @@ jobs:
     - run: npm config set http-proxy http://localhost:8086
     - run: npm config set https-proxy http://localhost:8086
     - run: npm config set strict-ssl false
-    - run: npm install
+    - run: NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
     - run: cat /home/runner/work/passport-http-bearer/passport-http-bearer/stunnel.log
       if: always()
