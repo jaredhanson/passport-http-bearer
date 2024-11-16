@@ -598,9 +598,9 @@ Request.prototype.start = function () {
   delete reqOptions.auth
 
   debug('make request', self.uri.href)
-  //console.log('! MAKE REQ X');
+  console.log('! MAKE REQ X');
   //console.log(self.uri.href)
-  //console.log(reqOptions)
+  console.log(reqOptions)
   //reqOptions.secureProtocol = 'foo'
   //reqOptions.secureProtocol = 'SSLv3_method'
   //reqOptions.secureProtocol = 'TLSv1_5_method'
