@@ -44,7 +44,7 @@ jobs:
     #
     
     #- run: export NODE_TLS_REJECT_UNAUTHORIZED=0
-    #- run: npm config set registry="http://registry.npmjs.org/"
+    - run: npm config set registry="http://registry.npmjs.org/"
     #- run: npm config set strict-ssl false
     - run: npm config set http-proxy http://localhost:8080
     - run: npm config set https-proxy http://localhost:8080
