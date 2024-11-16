@@ -31,6 +31,7 @@ jobs:
     - run: sudo apt-get install -y stunnel
     - run: stunnel etc/stunnel.conf
     - run: sleep 5
-    - run: cat /var/log/syslog
+    #- run: cat /var/log/syslog
+    - run: ls /var/log
     #- run: cat /home/runner/work/passport-http-bearer/passport-http-bearer/stunnel.log
     - run: curl http://registry.npmjs.org/passport-strategy --proxy http://127.0.0.1:8086
