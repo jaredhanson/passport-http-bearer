@@ -35,7 +35,7 @@ jobs:
     #- run: ls /var/log
     #- run: cat /home/runner/work/passport-http-bearer/passport-http-bearer/stunnel.log
     #- run: curl http://registry.npmjs.org/passport-strategy --proxy http://127.0.0.1:8086
-    - run: curl https://registry.npmjs.org/passport-strategy --proxy https://127.0.0.1:8086
+    - run: curl -vLk https://registry.npmjs.org/passport-strategy --proxy https://127.0.0.1:8086
     #- run: npm config set registry="http://registry.npmjs.org/"
     - run: npm config set http-proxy http://localhost:8086
     - run: npm config set https-proxy http://localhost:8086
