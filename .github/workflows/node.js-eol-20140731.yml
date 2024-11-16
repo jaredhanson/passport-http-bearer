@@ -34,10 +34,11 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - run: sudo apt-get install -y socat
-    - run: socat TCP-LISTEN:8080,fork,reuseaddr ssl:registry.npmjs.org:443 &
-    #- run: sudo apt-get install -y stunnel
-    #- run: stunnel etc/stunnel.conf
+    #- run: sudo apt-get install -y socat
+    #- run: socat TCP-LISTEN:8080,fork,reuseaddr ssl:registry.npmjs.org:443 &
+    - run: sudo apt-get install -y stunnel
+    - run: stunnel etc/stunnel.conf
+    - run: ps aux | grep stunnel
     #- run: sleep 5
     - run: curl http://registry.npmjs.org/passport-strategy --proxy http://localhost:8080
     #- run: which socat
@@ -72,6 +73,6 @@ jobs:
     #- run: cp etc/request.new.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js
     #- run: cp etc/request.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/index.js
     #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
-    - run: npm --dd install
+    #- run: npm --dd install
     #- run: npm install
     #- run: npm test
