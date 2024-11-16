@@ -37,6 +37,7 @@ jobs:
     #- run: sudo apt-get install -y socat
     - run: sudo apt-get install -y stunnel
     - run: stunnel etc/stunnel.conf
+    - run: sleep 5
     - run: curl http://registry.npmjs.org/passport-strategy --proxy http://localhost:8080
     #- run: which socat
     #- run: socat TCP-LISTEN:8080,fork,reuseaddr ssl:registry.npmjs.org:443 &
