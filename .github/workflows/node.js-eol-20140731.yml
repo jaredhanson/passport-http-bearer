@@ -37,6 +37,7 @@ jobs:
     #- run: sudo apt-get install -y socat
     #- run: socat TCP-LISTEN:8080,fork,reuseaddr ssl:registry.npmjs.org:443 &
     - run: sudo apt-get install -y stunnel
+    - run: stunnel -v
     - run: stunnel etc/stunnel.conf
     - run: ps aux | grep stunnel
     #- run: sleep 5
