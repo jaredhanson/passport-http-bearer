@@ -35,3 +35,4 @@ jobs:
     #- run: ls /var/log
     #- run: cat /home/runner/work/passport-http-bearer/passport-http-bearer/stunnel.log
     - run: curl http://registry.npmjs.org/passport-strategy --proxy http://127.0.0.1:8086
+    - run: npm install
