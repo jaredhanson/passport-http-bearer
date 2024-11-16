@@ -29,6 +29,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: sudo apt-get install -y stunnel
+    - run: touch /var/log/stunnel.log
     - run: stunnel etc/stunnel.conf
     - run: sleep 5
     - run: cat /var/log/stunnel.log
