@@ -10,7 +10,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-#    env:
+    env:
+      NVM_NODEJS_ORG_MIRROR: https://nodejs.org/dist
 #      ADDITIONAL_PARAMETERS: --without-snapshot
 #      CFLAGS: -O2
 #      CXXFLAGS: -O2
@@ -29,5 +30,5 @@ jobs:
     - run: python --version
     - uses: actions/checkout@v4
     - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    - run: . "$HOME/.nvm/nvm.sh" && nvm install 0.8.x "https://nodejs.org/dist"
+    - run: . "$HOME/.nvm/nvm.sh" && nvm install 0.8.x
     #- run: which nvm
