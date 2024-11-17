@@ -23,10 +23,6 @@ jobs:
         node-version: [ 0.8.x ]
 
 # https://github.com/npm/npm/issues/20191
-# openssl s_client -showcerts -connect registry.npmjs.org:443
-# openssl s_client -connect www.google.com:443 2>/dev/null </dev/null |  sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
-# openssl s_client -showcerts -connect registry.npmjs.org:443 2>/dev/null </dev/null |  sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
-
 # https://github.blog/security/supply-chain-security/npm-registry-deprecating-tls-1-0-tls-1-1/
     steps:
     - uses: actions/checkout@v4
@@ -34,46 +30,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    #- run: sudo apt-get install -y socat
-    #- run: socat TCP-LISTEN:8080,fork,reuseaddr ssl:registry.npmjs.org:443 &
     - run: sudo apt-get install -y stunnel
-    - run: stunnel -v
     - run: stunnel etc/stunnel.conf
-    - run: ps aux | grep stunnel
-    #- run: sleep 5
-    - run: curl http://registry.npmjs.org/passport-strategy --proxy http://localhost:8080
-    #- run: which socat
-    #
-    
-    #- run: export NODE_TLS_REJECT_UNAUTHORIZED=0
     - run: npm config set registry="http://registry.npmjs.org/"
-    #- run: npm config set strict-ssl false
-    - run: npm config set http-proxy http://localhost:8080
-    - run: npm config set https-proxy http://localhost:8080
-    #- run: npm cache clean
-    #- run: openssl version
-    #- run: openssl s_client -connect registry.npmjs.org:443
-    #- run: cat ~/.npmrc
-    #- run: npm config list
-    - run: npm config list -l
-    #- run: which npm
-    #- run: openssl ciphers -v | awk '{print $2}' | sort | uniq
-    #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/lib
-    #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules
-    #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf
-    #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/package.json
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/package.json
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/index.js
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js
-    #- run: ls /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/initialize.js
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
-    #- run: cp etc/config-defs.js.new /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
-    #- run: cp etc/request.new.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js
-    #- run: cp etc/request.js /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/request/index.js
-    #- run: cat /opt/hostedtoolcache/node/0.8.28/x64/lib/node_modules/npm/node_modules/npmconf/config-defs.js
-    #- run: npm --dd install
-    #- run: npm install
-    #- run: npm test
+    - run: npm config set proxy http://localhost:8080
+    - run: npm install
+    - run: npm test
