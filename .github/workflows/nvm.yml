@@ -19,7 +19,8 @@ jobs:
     - run: sudo apt-get install -y python2.7
     - run: ls /usr/bin/p*
     - run: ls -la /usr/bin/python
-    - run: ln -fs /usr/bin/python2.7 /usr/bin/python
+    - run: sudo ln -fs /usr/bin/python2.7 /usr/bin/python
+    - run: ls -la /usr/bin/python
     - run: python --version
     #- run: export PYTHON=/usr/bin/python2.7
     - uses: actions/checkout@v4
