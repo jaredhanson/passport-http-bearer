@@ -27,7 +27,8 @@ jobs:
     - uses: actions/checkout@v4
     - run: export CFLAGS=-O2
     - run: export CXXFLAGS=-O2
-    - run: export ADDITIONAL_PARAMETERS=--without-snapshot
+    #- run: export ADDITIONAL_PARAMETERS=--without-snapshot
+    - run: export ADDITIONAL_PARAMETERS=CFLAGS='-O2' CXXFLAGS='-O2'
     - name: Use Node.js ${{ matrix.node-version }}
       uses: dcodeIO/setup-node-nvm@v5
       with:
