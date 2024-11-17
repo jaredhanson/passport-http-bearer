@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 0.8.x, 0.6.x ]
+        node-version: [ 0.8.x ]
 
 # https://github.com/npm/npm/issues/20191
 # https://github.blog/security/supply-chain-security/npm-registry-deprecating-tls-1-0-tls-1-1/
