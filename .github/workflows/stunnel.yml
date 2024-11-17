@@ -32,6 +32,5 @@ jobs:
     - run: stunnel etc/stunnel.conf
     - run: npm config set registry="http://registry.npmjs.org/"
     - run: npm config set proxy http://localhost:8086
-    #- run: npm config set strict-ssl false
     - run: npm install
     - run: npm test
