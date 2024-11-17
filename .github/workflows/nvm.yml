@@ -22,6 +22,7 @@ jobs:
     - run: sudo ln -fs /usr/bin/python2.7 /usr/bin/python
     - run: ls -la /usr/bin/python
     - run: python --version
+    - run: ulimit -v unlimited
     #- run: export PYTHON=/usr/bin/python2.7
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
