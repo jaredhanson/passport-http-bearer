@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ADDITIONAL_PARAMETERS: --without-snapshot
+      CFLAGS: -O2
+      CXXFLAGS: -O2
 
     strategy:
       matrix:
@@ -30,7 +32,8 @@ jobs:
     - uses: actions/checkout@v4
     #- run: export CFLAGS=-O2
     #- run: export CXXFLAGS=-O2
-    #- run: echo $CXXFLAGS
+    - run: echo $CFLAGS
+    - run: echo $CXXFLAGS
     #- run: export ADDITIONAL_PARAMETERS=--without-snapshot
     #- run: export ADDITIONAL_PARAMETERS=CFLAGS='-O2' CXXFLAGS='-O2'
     - run: echo $ADDITIONAL_PARAMETERS
