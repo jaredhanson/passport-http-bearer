@@ -31,6 +31,6 @@ jobs:
     - run: sudo apt-get install -y stunnel
     - run: stunnel etc/stunnel.conf
     - run: npm config set registry="http://registry.npmjs.org/"
-    - run: npm config set proxy http://localhost:8086
+    - run: npm config set proxy http://localhost:8080
     - run: npm install
     - run: npm test
