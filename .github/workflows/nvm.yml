@@ -25,6 +25,8 @@ jobs:
     - run: ulimit -v unlimited
     #- run: export PYTHON=/usr/bin/python2.7
     - uses: actions/checkout@v4
+    - run: export CFLAGS=-O2
+    - run: export CXXFLAGS=-O2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: dcodeIO/setup-node-nvm@v5
       with:
