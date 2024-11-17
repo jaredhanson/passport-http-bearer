@@ -16,6 +16,7 @@ jobs:
         node-version: [ '0.8.x', '0.6.x' ]
 
     steps:
+    - run: python --version
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: dcodeIO/setup-node-nvm@v5
