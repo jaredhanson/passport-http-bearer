@@ -19,7 +19,8 @@ jobs:
     - run: sudo apt-get install -y python2.7
     - run: ls /usr/bin/p*
     - run: python --version
-    - run: export PYTHON=/usr/bin/python2.7
+    #- run: export PYTHON=/usr/bin/python2.7
+    - run: ln -s /usr/bin/python2.7 /usr/bin/python
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: dcodeIO/setup-node-nvm@v5
