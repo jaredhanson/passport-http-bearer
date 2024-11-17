@@ -13,7 +13,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ '0.8.x', '0.6.x' ]
+#        node-version: [ '0.8.x', '0.6.x' ]
+        node-version: [ '0.8.x' ]
 
     steps:
     - run: sudo apt-get install -y python2.7
@@ -40,3 +41,4 @@ jobs:
     - run: npm config set proxy http://localhost:8080
     - run: npm install
     - run: npm test
+    - run: which nvm
