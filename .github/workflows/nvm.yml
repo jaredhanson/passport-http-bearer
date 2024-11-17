@@ -19,6 +19,7 @@ jobs:
     - run: sudo apt-get install -y python2.7
     - run: ls /usr/bin/p*
     - run: python --version
+    - run: export PYTHON=/usr/bin/python2.7
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: dcodeIO/setup-node-nvm@v5
@@ -29,6 +30,5 @@ jobs:
     - run: stunnel etc/stunnel.conf
     - run: npm config set registry="http://registry.npmjs.org/"
     - run: npm config set proxy http://localhost:8080
-    - run: export PYTHON=/usr/bin/python2.7
     - run: npm install
     - run: npm test
