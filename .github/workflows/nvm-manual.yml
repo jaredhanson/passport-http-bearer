@@ -1,0 +1,33 @@
+name: Node.js NVM Manual
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+#    env:
+#      ADDITIONAL_PARAMETERS: --without-snapshot
+#      CFLAGS: -O2
+#      CXXFLAGS: -O2
+
+    strategy:
+      matrix:
+#        node-version: [ '0.8.x', '0.6.x' ]
+        node-version: [ '0.8.x' ]
+
+    steps:
+    - run: sudo apt-get install -y python2.7
+    - run: ls /usr/bin/p*
+    - run: ls -la /usr/bin/python
+    - run: sudo ln -fs /usr/bin/python2.7 /usr/bin/python
+    - run: ls -la /usr/bin/python
+    - run: python --version
+    - uses: actions/checkout@v4
+    - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    - run: nvm install 0.8.x
+    #- run: which nvm
