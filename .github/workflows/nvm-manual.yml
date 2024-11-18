@@ -22,7 +22,7 @@ jobs:
         node-version: [ '0.6.x' ]
 
     steps:
-    - run: wget http://www.openssl.org/source/openssl-0.9.8zb.tar.gz
+    - run: wget https://www.openssl.org/source/openssl-0.9.8zf.tar.gz
     - run: apt list -a libssl-dev
     - run: sudo apt-get install libssl1.1
     - run: sudo apt-get install -y python2.7
