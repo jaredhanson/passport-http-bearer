@@ -23,17 +23,17 @@ jobs:
 
     steps:
     - run: wget https://www.openssl.org/source/openssl-0.9.8zf.tar.gz
-    - run: apt list -a libssl-dev
-    - run: sudo apt-get update
-    - run: sudo apt-get install libssl1.1
+    #- run: apt list -a libssl-dev
+    #- run: sudo apt-get update
+    #- run: sudo apt-get install libssl1.1
     - run: sudo apt-get install -y python2.7
-    - run: ls /usr/include
+    #- run: ls /usr/include
     #- run: ls /usr/bin/p*
     #- run: ls -la /usr/bin/python
     - run: sudo ln -fs /usr/bin/python2.7 /usr/bin/python
-    - run: ls -la /usr/bin/python
-    - run: python --version
+    #- run: ls -la /usr/bin/python
+    #- run: python --version
     - uses: actions/checkout@v4
     - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    - run: . "$HOME/.nvm/nvm.sh" && nvm install 0.6 --without-snapshot CXXFLAGS=-I/foo/openssl
+    - run: . "$HOME/.nvm/nvm.sh" && nvm install 0.6 --without-snapshot CXXFLAGS='-I/foo/openssl'
     #- run: which nvm
