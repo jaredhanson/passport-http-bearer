@@ -28,6 +28,7 @@ jobs:
     - run: sudo apt-get update
     #- run: sudo apt-get install libssl1.1
     - run: sudo apt-get install -y python2.7
+    - run: sudo apt-get install -y libssl-dev
     #- run: ls /usr/include
     #- run: ls /usr/bin/p*
     #- run: ls -la /usr/bin/python
