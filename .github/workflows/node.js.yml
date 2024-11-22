@@ -41,8 +41,23 @@ jobs:
       run: echo "$N_VERSION"
     - env:
         N_MAJOR: ${{steps.node-version.outputs.major}}
-        N_MINOR: ${{steps.node-version.outputs.major}}
+        N_MINOR: ${{steps.node-version.outputs.minor}}
       run: echo "$N_MAJOR $N_MINOR"
+     
+    - id: npm-v
+      name: Get npm version
+      run: echo "version=${npm -v}" >> $GITHUB_OUTPUT
+      
+    - id: npm-version
+      uses: apexskier/github-semver-parse@v1
+      with:
+        version: ${{ steps.npm-v.outputs.version }}
+        
+    - env:
+        N_MAJOR: ${{steps.npm-version.outputs.major}}
+        N_MINOR: ${{steps.npm-version.outputs.minor}}
+      run: echo "npm - $N_MAJOR $N_MINOR"
+      
     - run: npm ci
       if: matrix.node-version >= '16'
     - run: npm install
