@@ -38,10 +38,11 @@ jobs:
     #- run: apt list -a libssl-dev
     - run: ls /usr/local
     - run: ls /usr/local/ssl
+    - run: ls /usr/local/ssl/lib
     - run: sudo apt-get update
     #- run: sudo apt-get install libssl1.1
     - run: sudo apt-get install -y python2.7
-    - run: sudo apt-get install -y libssl-dev
+    #- run: sudo apt-get install -y libssl-dev
     #- run: ls /usr/include
     #- run: ls /usr/bin/p*
     #- run: ls -la /usr/bin/python
@@ -51,6 +52,6 @@ jobs:
     - uses: actions/checkout@v4
     - run: echo $PWD
     - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    #- run: . $HOME/.nvm/nvm.sh && nvm install 0.6 --without-snapshot --openssl-includes=/home/runner/.nvm/.cache/src/node-v0.6.21/files/deps/openssl/include
+    - run: . $HOME/.nvm/nvm.sh && nvm install 0.6 --without-snapshot --openssl-includes=/usr/local/ssl/include --openssl-libpath=/usr/local/ssl/lib
     #- run: . $HOME/.nvm/nvm.sh && nvm install 0.6 --without-snapshot --without-ssl
     #- run: which nvm
