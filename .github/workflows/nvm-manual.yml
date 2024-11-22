@@ -38,5 +38,6 @@ jobs:
     - uses: actions/checkout@v4
     - run: echo $PWD
     - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    - run: . $HOME/.nvm/nvm.sh && nvm install 0.6 --without-snapshot --openssl-includes=/home/runner/.nvm/.cache/src/node-v0.6.21/files/deps/openssl/include
+    #- run: . $HOME/.nvm/nvm.sh && nvm install 0.6 --without-snapshot --openssl-includes=/home/runner/.nvm/.cache/src/node-v0.6.21/files/deps/openssl/include
+    - run: . $HOME/.nvm/nvm.sh && nvm install 0.6 --without-snapshot --without-ssl
     #- run: which nvm
