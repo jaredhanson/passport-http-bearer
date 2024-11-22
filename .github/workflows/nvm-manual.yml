@@ -34,7 +34,7 @@ jobs:
       run: |
         ./config
         make
-        make install
+        sudo make install
     #- run: apt list -a libssl-dev
     - run: ls /usr/local
     - run: ls /usr/local/ssl
