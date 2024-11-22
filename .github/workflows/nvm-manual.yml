@@ -17,11 +17,14 @@ jobs:
 #      CXXFLAGS: -I/foo/openssl
 #      CXXFLAGS: -I/home/runner/.nvm/.cache/src/node-v0.6.21/files/deps/openssl/include
 
+    # https://github.com/nodejs/node-gyp/blob/main/docs/Linking-to-OpenSSL.md
     strategy:
       matrix:
 #        node-version: [ '0.8.x', '0.6.x' ]
         node-version: [ '0.6.x' ]
 
+# https://groups.google.com/g/mailing.openssl.users/c/Qi5yYi8ZzPo
+# https://github.com/openssl/openssl/blob/master/INSTALL.md
     steps:
     - run: echo $PWD
     - run: ls

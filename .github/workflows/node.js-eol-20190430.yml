@@ -22,6 +22,7 @@ jobs:
       matrix:
         node-version: [ 6.x, 4.x, 0.12.x, 0.10.x ]
 
+# https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
