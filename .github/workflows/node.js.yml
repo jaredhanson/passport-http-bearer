@@ -35,7 +35,7 @@ jobs:
     - id: node-version
       uses: apexskier/github-semver-parse@v1
       with:
-        version: ${{ steps.setup-node.outputs.ode-version }}
+        version: ${{ steps.setup-node.outputs.node-version }}
     - env:
         N_VERSION: ${{steps.setup-node.outputs.node-version}}
       run: echo "$N_VERSION"
