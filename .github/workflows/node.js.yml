@@ -43,6 +43,8 @@ jobs:
       uses: apexskier/github-semver-parse@v1
       with:
         version: ${{ steps.node-v.outputs.version }}
+        
+    - run: which jq
     
     - env:
         N_MAJOR: ${{steps.node-version.outputs.major}}
