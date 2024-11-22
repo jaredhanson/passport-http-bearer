@@ -68,6 +68,14 @@ jobs:
         N_MINOR: ${{steps.npm-version.outputs.minor}}
       run: echo "npm - $N_MAJOR $N_MINOR"
       
+    - id: lockfile-version
+      name: Get package-lock.json lockfileVersion
+      run: echo "version=$(cat package-lock.json | jq '.lockfileVersion')" >> $GITHUB_OUTPUT
+      
+    - env:
+        N_MAJOR: ${{steps.lockfile-version.outputs.version}}
+      run: echo "lockfile - $N_MAJOR"
+      
     - run: npm ci
       # The [`ci`][1] command was [introduced][2] with npm 6.x, and is intended
       # to be used in continuous integration environments.  If npm 6.x or later
