@@ -46,7 +46,7 @@ jobs:
      
     - id: npm-v
       name: Get npm version
-      run: echo "version=${npm -v}" >> $GITHUB_OUTPUT
+      run: echo "version=$(npm -v)" >> $GITHUB_OUTPUT
       
     - id: npm-version
       uses: apexskier/github-semver-parse@v1
