@@ -27,10 +27,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - id: setup-node
+      name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+    - env:
+        N_VERSION: ${{steps.setup-node.outputs.node-version}}
+      run: echo "$N_VERSION"
     - run: npm ci
       if: matrix.node-version >= '16'
     - run: npm install
