@@ -70,7 +70,7 @@ jobs:
       run: echo "npm - $N_MAJOR $N_MINOR"
       
     - run: npm ci
-      if: steps.npm-version.outputs.major >= 4
+      if: steps.npm-version.outputs.major >= 6
     - run: npm install
-      if: steps.npm-version.outputs.major < 4
+      if: steps.npm-version.outputs.major < 6
     - run: npm test
