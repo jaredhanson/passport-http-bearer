@@ -23,7 +23,8 @@ jobs:
         - 20.x
         - 18.x
         - 16.x
-        - 14.x
+#        - 14.x
+        - 6.x
 
     steps:
     - uses: actions/checkout@v4
@@ -67,7 +68,7 @@ jobs:
       run: echo "npm - $N_MAJOR $N_MINOR"
       
     - run: npm ci
-      if: steps.node-version.outputs.major >= 16
-    - run: npm install
-      if: steps.node-version.outputs.major < 16
+#      if: steps.node-version.outputs.major >= 16
+#    - run: npm install
+#      if: steps.node-version.outputs.major < 16
     - run: npm test
