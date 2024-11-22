@@ -29,7 +29,15 @@ jobs:
     - run: wget https://www.openssl.org/source/openssl-0.9.8r.tar.gz
     - run: ls
     - run: tar xvzf openssl-0.9.8r.tar.gz
+    - name: Build OpenSSL
+      working-directory: ./openssl-0.9.8r
+      run: |
+        ./config
+        make
+        make install
     #- run: apt list -a libssl-dev
+    - run: ls /usr/local
+    - run: ls /usr/local/ssl
     - run: sudo apt-get update
     #- run: sudo apt-get install libssl1.1
     - run: sudo apt-get install -y python2.7
