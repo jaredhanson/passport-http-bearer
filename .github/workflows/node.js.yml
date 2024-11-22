@@ -24,8 +24,7 @@ jobs:
         - 18.x
         - 16.x
 #        - 14.x
-#        - 8.x
-        - 7.x
+        - 8.x
         - 6.x
 
     steps:
@@ -70,7 +69,16 @@ jobs:
       run: echo "npm - $N_MAJOR $N_MINOR"
       
     - run: npm ci
+      # The [`ci`][1] command was [introduced][2] with npm 6.x, and is intended
+      # to be used in continuous integration environments.  If npm 6.x or later
+      # is available, `npm ci` is executed to install dependencies.  Otherwise,
+      # `npm install` is executed.
+      #
+      # [1]: https://docs.npmjs.com/cli/v10/commands/npm-ci
+      # [2]: https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable
       if: steps.npm-version.outputs.major >= 6
+    
     - run: npm install
       if: steps.npm-version.outputs.major < 6
+    
     - run: npm test
