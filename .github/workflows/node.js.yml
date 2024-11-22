@@ -27,28 +27,34 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
     - id: setup-node
       name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+    
+    - id: node-v
+      name: Output Node.js version
+      run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
+    
     - id: node-version
+      name: Parse Node.js version
       uses: apexskier/github-semver-parse@v1
       with:
-        version: ${{ steps.setup-node.outputs.node-version }}
-    - env:
-        N_VERSION: ${{steps.setup-node.outputs.node-version}}
-      run: echo "$N_VERSION"
+        version: ${{ steps.node-v.outputs.version }}
+    
     - env:
         N_MAJOR: ${{steps.node-version.outputs.major}}
         N_MINOR: ${{steps.node-version.outputs.minor}}
-      run: echo "$N_MAJOR $N_MINOR"
+      run: echo "node - $N_MAJOR $N_MINOR"
      
     - id: npm-v
-      name: Get npm version
+      name: Output npm version
       run: echo "version=$(npm -v)" >> $GITHUB_OUTPUT
       
     - id: npm-version
+      name: Parse npm version
       uses: apexskier/github-semver-parse@v1
       with:
         version: ${{ steps.npm-v.outputs.version }}
