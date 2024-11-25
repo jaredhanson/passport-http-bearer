@@ -13,6 +13,10 @@ describe('Strategy', function() {
     expect(strategy.name).to.equal('bearer');
   });
   
+  it('should default the allowQueryParameter option to true', () => {
+    expect(strategy._allowQueryParameter).to.be.true;
+  })
+
   it('should authenticate request with bearer scheme', function(done) {
     var strategy = new Strategy(function(token, cb) {
       return cb(null, { id: '248289761001' });
@@ -65,10 +69,11 @@ describe('Strategy', function() {
       .authenticate();
   }); // should authenticate request with token in form-encoded body parameter
   
-  it('should authenticate request with token in URI query parameter', function(done) {
-    var strategy = new Strategy(function(token, cb) {
-      return cb(null, { id: '248289761001' });
-    });
+  describe('when the allowQueryParameter option is true', () => {
+    it('should authenticate request with token in URI query parameter', function(done) {
+      var strategy = new Strategy({ allowQueryParameter: true }, function(token, cb) {
+        return cb(null, { id: '248289761001' });
+      });
     
     chai.passport.use(strategy)
       .request(function(req) {
@@ -81,8 +86,29 @@ describe('Strategy', function() {
         done();
       })
       .authenticate();
-  }); // should authenticate request with token in URI query parameter
+    }); // should authenticate request with token in URI query parameter
+  });
   
+  describe('when the allowQueryParameter option is false', () => {
+    it('should NOT authenticate request with token in URI query parameter', function (done) {
+      const strategy = new Strategy({ allowQueryParameter: false }, function (token, cb) {
+      return cb(null, { id: '248289761001' });
+    });
+
+    chai.passport
+      .use(strategy)
+      .request(function (req) {
+        req.query = {};
+        req.query.access_token = 'mF_9.B5f-4.1JqM';
+      })
+      .fail(function (status) {
+        expect(status).to.equal(400);
+        done();
+      })
+      .authenticate();
+    }); // should NOT authenticate request with token in URI query parameter
+  });
+
   it('should challenge request with realm', function(done) {
     var strategy = new Strategy({ realm: 'example' }, function(token, cb) {
       throw new Error('verify function should not be called');
